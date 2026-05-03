@@ -1,66 +1,306 @@
-/* ===== Google Fonts ===== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap');
-
-/* ===== Tailwind CSS Base ===== */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ===============================================
-  CSS Variables for Light and Dark Theme
-===============================================
-*/
-
 :root {
-  --brand: #FF4F00; /* Bright Orange */
-  --brand-light: #FF8C42;
-  --background: #F8F9FA; /* Off-white */
-  --card-bg: #FFFFFF;
-  --text-dark: #212529; /* Very Dark Grey */
-  --text-light: #6C757D; /* Lighter Grey */
-  --border: #E9ECEF;
-  --header-bg: rgba(248, 249, 250, 0.8); /* Semi-transparent Off-white */
+  --bg: #070d18;
+  --bg-soft: rgba(11, 18, 34, 0.88);
+  --panel: rgba(10, 17, 31, 0.78);
+  --panel-strong: rgba(12, 22, 41, 0.96);
+  --line: rgba(122, 178, 255, 0.22);
+  --line-strong: rgba(122, 178, 255, 0.5);
+  --accent: #7cf7d4;
+  --accent-2: #ff8a4c;
+  --text-primary: #edf7ff;
+  --text-muted: #9eb5ca;
+  --text-dim: #6f88a3;
+  --shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
 }
 
-html.dark {
-  --brand: #FF4F00;
-  --brand-light: #FF8C42;
-  --background: #121212; /* True Black for Deep Dark Mode */
-  --card-bg: #1E1E1E; /* Very Dark Grey for cards */
-  --text-dark: #F8F9FA; /* Off-white text */
-  --text-light: #AAB0B6; /* Lighter Grey for dark mode */
-  --border: #333333;
-  --header-bg: rgba(18, 18, 18, 0.8); /* Semi-transparent Black */
-}
-
-
-/* ===== Base Styles ===== */
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: var(--background);
-  color: var(--text-light);
-  transition: background-color 0.3s ease, color 0.3s ease;
+* {
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem; /* Height of the fixed header */
 }
 
-/* ===== Custom Scrollbar (Optional but nice) ===== */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(124, 247, 212, 0.12), transparent 28%),
+    radial-gradient(circle at top right, rgba(255, 138, 76, 0.12), transparent 30%),
+    linear-gradient(180deg, #040812 0%, #070d18 38%, #091223 100%);
+  color: var(--text-primary);
+  font-family: var(--font-body), sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(124, 247, 212, 0.28);
+  color: var(--text-primary);
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: #050b15;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--brand);
-  border-radius: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--brand-light);
+.font-display {
+  font-family: var(--font-display), sans-serif;
+}
+
+.hud-grid {
+  background-image:
+    linear-gradient(rgba(124, 247, 212, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 247, 212, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at center, black 52%, transparent 100%);
+}
+
+.hud-glow {
+  pointer-events: none;
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  opacity: 0.5;
+}
+
+.hud-glow-cyan {
+  top: 120px;
+  left: -100px;
+  height: 360px;
+  width: 360px;
+  background: rgba(124, 247, 212, 0.24);
+}
+
+.hud-glow-orange {
+  right: -120px;
+  top: 680px;
+  height: 420px;
+  width: 420px;
+  background: rgba(255, 138, 76, 0.18);
+}
+
+.hud-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(12, 21, 37, 0.95), rgba(7, 13, 24, 0.9));
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+  border-radius: 28px;
+  padding: 1.5rem;
+}
+
+.hud-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(124, 247, 212, 0.4), transparent 30%, rgba(255, 138, 76, 0.26));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.hud-panel-hover {
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.hud-panel-hover:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.52), 0 0 0 1px rgba(124, 247, 212, 0.18);
+}
+
+.hud-mini-panel {
+  border-radius: 20px;
+  border: 1px solid rgba(122, 178, 255, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 1rem;
+}
+
+.hud-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.hud-pill::before {
+  content: '';
+  height: 0.55rem;
+  width: 0.55rem;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 14px rgba(124, 247, 212, 0.8);
+}
+
+.hud-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  min-height: 52px;
+  border-radius: 16px;
+  border: 1px solid rgba(124, 247, 212, 0.42);
+  background: linear-gradient(135deg, rgba(124, 247, 212, 0.16), rgba(124, 247, 212, 0.08));
+  padding: 0 1.1rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.hud-button:hover {
+  transform: translateY(-2px);
+  border-color: rgba(124, 247, 212, 0.72);
+}
+
+.hud-button-secondary {
+  border-color: rgba(255, 138, 76, 0.34);
+  background: linear-gradient(135deg, rgba(255, 138, 76, 0.12), rgba(255, 138, 76, 0.04));
+}
+
+.hud-tag {
+  border-radius: 999px;
+  border: 1px solid rgba(122, 178, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.5rem 0.8rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.social-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(122, 178, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.7rem 1rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.social-chip:hover {
+  transform: translateY(-2px);
+  border-color: rgba(124, 247, 212, 0.5);
+  color: var(--text-primary);
+}
+
+.avatar-shell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid rgba(124, 247, 212, 0.3);
+  background: linear-gradient(180deg, rgba(124, 247, 212, 0.08), rgba(255, 138, 76, 0.08));
+  min-height: 420px;
+}
+
+.avatar-shell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+}
+
+.avatar-scanline {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(124, 247, 212, 0.11) 40%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  mix-blend-mode: screen;
+  animation: scan 5.5s linear infinite;
+  z-index: 1;
+}
+
+.timeline-dot {
+  position: relative;
+}
+
+.timeline-dot::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.7rem;
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 16px rgba(124, 247, 212, 0.8);
+}
+
+.icon-frame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.8rem;
+  width: 2.8rem;
+  border-radius: 16px;
+  border: 1px solid rgba(124, 247, 212, 0.22);
+  background: rgba(124, 247, 212, 0.08);
+}
+
+.hud-input {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(122, 178, 255, 0.2);
+  background: rgba(255, 255, 255, 0.035);
+  padding: 0.95rem 1rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.hud-input::placeholder {
+  color: rgba(158, 181, 202, 0.72);
+}
+
+.hud-input:focus {
+  border-color: rgba(124, 247, 212, 0.55);
+  box-shadow: 0 0 0 3px rgba(124, 247, 212, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@media (min-width: 640px) {
+  .hud-panel {
+    padding: 2rem;
+  }
 }
