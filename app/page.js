@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import {
   ArrowRight,
   BrainCircuit,
@@ -19,7 +20,7 @@ import {
 
 const quickStats = [
   { label: 'XP', value: '300+', note: 'LeetCode problems solved' },
-  { label: 'Current Quest', value: 'TechAivv', note: 'Software Developer Intern' },
+  { label: 'Current Quest', value: 'TechAivv', note: 'Current role, NDA-safe summary', compact: true },
   { label: 'Build Focus', value: 'Agentic AI', note: 'Full stack product systems' },
 ];
 
@@ -28,24 +29,30 @@ const runnerSteps = [
     year: '2022',
     title: 'Spawned Into AI & Data Science',
     description: 'Started B.Tech at VIPS with a strong focus on applied AI and product building.',
+    detail: 'Foundation unlocked: data systems, AI concepts, and product mindset.',
     color: 'cyan',
   },
   {
     year: '2025',
     title: 'Paisalo Side Quest',
     description: 'Automated internal workflows with Python, OCR, and pipeline scheduling.',
+    detail: 'Reward earned: workflow automation, reliability improvements, and backend confidence.',
     color: 'orange',
   },
   {
     year: '2025',
-    title: 'TechAivv Main Mission',
-    description: 'Building AI SaaS flows, faster interfaces, and low-latency backend systems.',
+    title: 'Flo.AI Active Build',
+    description: 'Building agentic workflows and multi-step automation systems around generative AI.',
+    detail: 'Boss mechanics unlocked: orchestration, reasoning chains, and AI-first product design.',
     color: 'cyan',
   },
   {
     year: 'Now',
-    title: 'Flo.AI Active Run',
-    description: 'Designing multi-step agentic workflows with real product outcomes.',
+    title: 'TechAivv Current Mission',
+    description:
+      'Currently contributing to AI product experiences, responsive frontend systems, and workflow-focused platform features.',
+    detail:
+      'NDA-safe summary: focusing on scalable product work, interface quality, and automation outcomes without exposing internal implementation details.',
     color: 'orange',
   },
 ];
@@ -103,6 +110,46 @@ function SectionTitle({ tag, title, text }) {
 }
 
 export default function Home() {
+  const runSectionRef = useRef(null);
+  const runTimerRef = useRef(null);
+  const [isRunning, setIsRunning] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
+
+  const startRun = () => {
+    if (runTimerRef.current) {
+      window.clearInterval(runTimerRef.current);
+      runTimerRef.current = null;
+    }
+
+    runSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setIsRunning(true);
+    setActiveStep(0);
+
+    let step = 0;
+    runTimerRef.current = window.setInterval(() => {
+      step += 1;
+      if (step >= runnerSteps.length) {
+        window.clearInterval(runTimerRef.current);
+        runTimerRef.current = null;
+        setActiveStep(runnerSteps.length - 1);
+        setIsRunning(false);
+        return;
+      }
+      setActiveStep(step);
+    }, 1400);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (runTimerRef.current) {
+        window.clearInterval(runTimerRef.current);
+      }
+    };
+  }, []);
+
+  const progressPercent =
+    runnerSteps.length > 1 ? `${(activeStep / (runnerSteps.length - 1)) * 100}%` : '0%';
+
   return (
     <main className="game-shell">
       <div className="arena-bg" />
@@ -143,24 +190,26 @@ export default function Home() {
               Journey
             </h1>
             <p className="max-w-2xl text-lg leading-8 text-slate-300">
-              Full stack AI developer building fast, smart products. This portfolio is now shaped like a live run:
-              milestones as tracks, projects as levels, and experience as progress.
+              Full stack AI developer building fast, smart products. This portfolio is shaped like a live run:
+              milestones as tracks, projects as levels, and experience as visible progress.
             </p>
 
             <div className="flex flex-wrap gap-4">
               <a href="/Yudhveer_resume2.pdf" target="_blank" rel="noreferrer" className="action-btn">
                 Open Resume
               </a>
-              <a href="#run" className="ghost-btn">
+              <button type="button" onClick={startRun} className="ghost-btn">
                 Start Run
-              </a>
+              </button>
             </div>
 
             <div className="hero-stats">
               {quickStats.map((stat) => (
                 <div key={stat.label} className="stat-card">
                   <p className="text-[11px] uppercase tracking-[0.32em] text-slate-500">{stat.label}</p>
-                  <p className="mt-2 font-display text-3xl uppercase tracking-[0.06em] text-white">{stat.value}</p>
+                  <p className={`mt-2 font-display uppercase text-white ${stat.compact ? 'stat-value-compact' : 'stat-value'}`}>
+                    {stat.value}
+                  </p>
                   <p className="mt-2 text-sm text-slate-400">{stat.note}</p>
                 </div>
               ))}
@@ -221,39 +270,72 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section id="run" className="section-block">
+      <section id="run" ref={runSectionRef} className="section-block">
         <SectionTitle
           tag="Run Timeline"
-          title="Experience like a live endless runner"
-          text="This section is built to feel like motion through your journey. The road keeps moving, and each checkpoint marks what you unlocked."
+          title="Start the run and move through the checkpoints"
+          text="Press Start Run and the player marker travels through your journey. The current TechAivv phase is presented in NDA-safe language only."
         />
 
         <div className="runner-stage">
-          <div className="runner-horizon" />
-          <div className="runner-road">
+          <div className={`runner-road ${isRunning ? 'runner-road-active' : ''}`}>
+            <div className="runner-horizon" />
             <div className="lane lane-left" />
             <div className="lane lane-mid" />
             <div className="lane lane-right" />
             <div className="dash dash-1" />
             <div className="dash dash-2" />
             <div className="dash dash-3" />
-            <div className="runner-token" />
+
+            <div className="progress-rail">
+              <div className="progress-line" />
+              <div className="progress-fill" style={{ width: progressPercent }} />
+              <motion.div
+                className={`runner-token ${isRunning ? 'runner-token-running' : ''}`}
+                animate={{ left: progressPercent }}
+                transition={{ duration: 0.85, ease: 'easeInOut' }}
+              />
+
+              <div className="rail-stops">
+                {runnerSteps.map((step, index) => (
+                  <button
+                    key={`${step.year}-${step.title}`}
+                    type="button"
+                    onClick={() => setActiveStep(index)}
+                    className={`rail-stop ${index <= activeStep ? 'rail-stop-active' : ''}`}
+                    aria-label={`Go to ${step.title}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="run-status-panel">
+              <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">
+                {isRunning ? 'Run in progress' : 'Run ready'}
+              </p>
+              <h3 className="mt-2 font-display text-2xl uppercase tracking-[0.06em] text-white">
+                {runnerSteps[activeStep].title}
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-slate-300">{runnerSteps[activeStep].detail}</p>
+            </div>
           </div>
 
           <div className="checkpoint-row">
             {runnerSteps.map((step, index) => (
-              <motion.div
+              <motion.button
                 key={`${step.year}-${step.title}`}
+                type="button"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
-                className={`checkpoint checkpoint-${step.color}`}
+                onClick={() => setActiveStep(index)}
+                className={`checkpoint checkpoint-${step.color} ${index === activeStep ? 'checkpoint-active' : ''}`}
               >
                 <p className="text-[11px] uppercase tracking-[0.3em] text-slate-400">{step.year}</p>
                 <h3 className="mt-2 font-display text-2xl uppercase tracking-[0.06em] text-white">{step.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-300">{step.description}</p>
-              </motion.div>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -339,7 +421,7 @@ export default function Home() {
           <div className="contact-copy">
             <SectionTitle
               tag="Next Level"
-              title="Let’s build something that feels alive"
+              title="Let's build something that feels alive"
               text="If you want an AI product, automation workflow, or frontend experience with real motion and personality, send the mission details here."
             />
 

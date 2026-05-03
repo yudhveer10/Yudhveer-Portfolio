@@ -38,6 +38,11 @@ a {
   text-decoration: none;
 }
 
+button {
+  font: inherit;
+  color: inherit;
+}
+
 ::selection {
   background: rgba(114, 246, 255, 0.3);
   color: white;
@@ -102,6 +107,7 @@ a {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  cursor: pointer;
 }
 
 .action-btn {
@@ -166,7 +172,8 @@ a {
 .skill-card,
 .contact-copy,
 .contact-form,
-.checkpoint {
+.checkpoint,
+.run-status-panel {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -178,7 +185,8 @@ a {
 .skill-card,
 .contact-copy,
 .contact-form,
-.checkpoint {
+.checkpoint,
+.run-status-panel {
   border-radius: 24px;
   padding: 1.2rem;
 }
@@ -192,6 +200,18 @@ a {
 .project-card:hover {
   border-color: rgba(114, 246, 255, 0.38);
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.38);
+}
+
+.stat-value {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  line-height: 0.95;
+  letter-spacing: 0.06em;
+}
+
+.stat-value-compact {
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  line-height: 0.95;
+  letter-spacing: 0.03em;
 }
 
 .social-link {
@@ -265,9 +285,9 @@ a {
 
 .runner-road {
   position: relative;
-  height: 360px;
+  height: 430px;
   overflow: hidden;
-  border-radius: 38px 38px 0 0;
+  border-radius: 38px;
   border: 1px solid rgba(129, 181, 255, 0.18);
   background:
     radial-gradient(circle at center top, rgba(114, 246, 255, 0.08), transparent 30%),
@@ -275,13 +295,17 @@ a {
   perspective: 900px;
 }
 
+.runner-road-active {
+  box-shadow: 0 0 0 1px rgba(114, 246, 255, 0.1), 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
 .runner-horizon {
   position: absolute;
   left: 50%;
+  top: 86px;
   width: min(100%, 740px);
   height: 2px;
   transform: translateX(-50%);
-  margin-top: 80px;
   background: linear-gradient(90deg, transparent, rgba(114, 246, 255, 0.85), transparent);
   box-shadow: 0 0 22px rgba(114, 246, 255, 0.5);
 }
@@ -294,14 +318,14 @@ a {
 }
 
 .lane {
-  top: 70px;
+  top: 76px;
   width: 2px;
-  height: 320px;
+  height: 250px;
   background: linear-gradient(180deg, rgba(114, 246, 255, 0.2), rgba(114, 246, 255, 0));
 }
 
 .lane-left {
-  transform: translateX(-50%) perspective(800px) rotateX(66deg) translateX(-180px);
+  transform: translateX(-50%) perspective(800px) rotateX(66deg) translateX(-220px);
 }
 
 .lane-mid {
@@ -309,16 +333,21 @@ a {
 }
 
 .lane-right {
-  transform: translateX(-50%) perspective(800px) rotateX(66deg) translateX(180px);
+  transform: translateX(-50%) perspective(800px) rotateX(66deg) translateX(220px);
 }
 
 .dash {
-  bottom: -36px;
+  bottom: 70px;
   width: 18px;
   height: 120px;
   border-radius: 999px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(114, 246, 255, 0.9));
   animation: dashMove 1.45s linear infinite;
+  animation-play-state: paused;
+}
+
+.runner-road-active .dash {
+  animation-play-state: running;
 }
 
 .dash-1 {
@@ -333,39 +362,118 @@ a {
   animation-delay: 0.96s;
 }
 
+.progress-rail {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 46px;
+  z-index: 3;
+  height: 54px;
+}
+
+.progress-line,
+.progress-fill {
+  position: absolute;
+  left: 0;
+  top: 25px;
+  height: 4px;
+  border-radius: 999px;
+}
+
+.progress-line {
+  width: 100%;
+  background: rgba(129, 181, 255, 0.16);
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, var(--cyan), var(--orange));
+  box-shadow: 0 0 18px rgba(114, 246, 255, 0.35);
+}
+
+.rail-stops {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rail-stop {
+  height: 18px;
+  width: 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #142032;
+  box-shadow: inset 0 0 0 1px rgba(129, 181, 255, 0.28);
+  cursor: pointer;
+}
+
+.rail-stop-active {
+  background: white;
+  box-shadow: 0 0 0 5px rgba(114, 246, 255, 0.1), 0 0 18px rgba(114, 246, 255, 0.55);
+}
+
 .runner-token {
   position: absolute;
-  left: 50%;
-  bottom: 28px;
-  width: 70px;
-  height: 70px;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  width: 52px;
+  height: 52px;
   transform: translateX(-50%);
-  border-radius: 24px 24px 16px 16px;
+  border-radius: 18px 18px 12px 12px;
   border: 1px solid rgba(114, 246, 255, 0.45);
   background:
-    radial-gradient(circle at top, rgba(114, 246, 255, 0.5), rgba(114, 246, 255, 0) 55%),
-    linear-gradient(180deg, rgba(114, 246, 255, 0.2), rgba(10, 15, 27, 0.8));
-  box-shadow: 0 0 35px rgba(114, 246, 255, 0.2);
-  animation: tokenBounce 1s ease-in-out infinite;
+    radial-gradient(circle at top, rgba(114, 246, 255, 0.52), rgba(114, 246, 255, 0) 55%),
+    linear-gradient(180deg, rgba(114, 246, 255, 0.18), rgba(10, 15, 27, 0.9));
+  box-shadow: 0 0 35px rgba(114, 246, 255, 0.28);
 }
 
 .runner-token::before {
   content: '';
   position: absolute;
   left: 50%;
-  top: 12px;
-  width: 16px;
-  height: 16px;
+  top: 11px;
+  width: 14px;
+  height: 14px;
   transform: translateX(-50%);
   border-radius: 999px;
   background: white;
   box-shadow: 0 0 16px rgba(114, 246, 255, 0.9);
 }
 
+.runner-token-running {
+  animation: tokenBounce 0.7s ease-in-out infinite;
+}
+
+.run-status-panel {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  width: min(90%, 560px);
+  transform: translateX(-50%);
+  z-index: 3;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
 .checkpoint-row {
   display: grid;
   gap: 1rem;
-  margin-top: -18px;
+  margin-top: 1rem;
+}
+
+.checkpoint {
+  text-align: left;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.checkpoint:hover,
+.checkpoint-active {
+  transform: translateY(-4px);
+  border-color: rgba(114, 246, 255, 0.4);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.38);
 }
 
 .checkpoint-cyan::before,
@@ -435,14 +543,14 @@ a {
 
 @keyframes dashMove {
   0% {
-    transform: translateX(-50%) perspective(760px) rotateX(72deg) translateY(-240px) scale(0.25);
+    transform: translateX(-50%) perspective(760px) rotateX(72deg) translateY(-220px) scale(0.25);
     opacity: 0;
   }
   20% {
     opacity: 1;
   }
   100% {
-    transform: translateX(-50%) perspective(760px) rotateX(72deg) translateY(80px) scale(1.2);
+    transform: translateX(-50%) perspective(760px) rotateX(72deg) translateY(90px) scale(1.2);
     opacity: 0;
   }
 }
