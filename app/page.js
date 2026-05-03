@@ -112,16 +112,23 @@ function SectionTitle({ tag, title, text }) {
 export default function Home() {
   const runSectionRef = useRef(null);
   const runTimerRef = useRef(null);
+  const focusTimerRef = useRef(null);
   const [isRunning, setIsRunning] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  const [hasStartedRun, setHasStartedRun] = useState(false);
 
   const startRun = () => {
     if (runTimerRef.current) {
       window.clearInterval(runTimerRef.current);
       runTimerRef.current = null;
     }
+    if (focusTimerRef.current) {
+      window.clearTimeout(focusTimerRef.current);
+      focusTimerRef.current = null;
+    }
 
     runSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setHasStartedRun(true);
     setIsRunning(true);
     setActiveStep(0);
 
@@ -133,6 +140,9 @@ export default function Home() {
         runTimerRef.current = null;
         setActiveStep(runnerSteps.length - 1);
         setIsRunning(false);
+        focusTimerRef.current = window.setTimeout(() => {
+          runSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 250);
         return;
       }
       setActiveStep(step);
@@ -143,6 +153,9 @@ export default function Home() {
     return () => {
       if (runTimerRef.current) {
         window.clearInterval(runTimerRef.current);
+      }
+      if (focusTimerRef.current) {
+        window.clearTimeout(focusTimerRef.current);
       }
     };
   }, []);
@@ -273,13 +286,17 @@ export default function Home() {
       <section id="run" ref={runSectionRef} className="section-block">
         <SectionTitle
           tag="Run Timeline"
-          title="Start the run and move through the checkpoints"
-          text="Press Start Run and the player marker travels through your journey. The current TechAivv phase is presented in NDA-safe language only."
+          title="Start the run and move through deep-space checkpoints"
+          text="The run now starts inside the scene itself. A character appears on the track, runs through a space tunnel, and carries the story forward checkpoint by checkpoint with NDA-safe TechAivv language."
         />
 
         <div className="runner-stage">
           <div className={`runner-road ${isRunning ? 'runner-road-active' : ''}`}>
+            <div className="space-stars stars-back" />
+            <div className="space-stars stars-mid" />
+            <div className="space-stars stars-front" />
             <div className="runner-horizon" />
+            <div className="space-glow-ring" />
             <div className="lane lane-left" />
             <div className="lane lane-mid" />
             <div className="lane lane-right" />
@@ -287,36 +304,79 @@ export default function Home() {
             <div className="dash dash-2" />
             <div className="dash dash-3" />
 
-            <div className="progress-rail">
-              <div className="progress-line" />
-              <div className="progress-fill" style={{ width: progressPercent }} />
-              <motion.div
-                className={`runner-token ${isRunning ? 'runner-token-running' : ''}`}
-                animate={{ left: progressPercent }}
-                transition={{ duration: 0.85, ease: 'easeInOut' }}
-              />
+            <div className="runner-gates">
+              {runnerSteps.map((step, index) => {
+                const depth = Math.abs(index - activeStep);
+                const isPast = index < activeStep;
+                const isCurrent = index === activeStep;
 
-              <div className="rail-stops">
-                {runnerSteps.map((step, index) => (
-                  <button
-                    key={`${step.year}-${step.title}`}
+                return (
+                  <motion.button
+                    key={`${step.year}-${step.title}-gate`}
                     type="button"
                     onClick={() => setActiveStep(index)}
-                    className={`rail-stop ${index <= activeStep ? 'rail-stop-active' : ''}`}
-                    aria-label={`Go to ${step.title}`}
-                  />
-                ))}
-              </div>
+                    className={`runner-gate ${isCurrent ? 'runner-gate-active' : ''} ${isPast ? 'runner-gate-past' : ''}`}
+                    animate={{
+                      left: `${12 + index * 25}%`,
+                      top: `${78 - depth * 12}%`,
+                      scale: isCurrent ? 1.16 : Math.max(0.68, 1 - depth * 0.12),
+                      opacity: isPast ? 0.35 : 1 - depth * 0.12,
+                    }}
+                    transition={{ duration: 0.75, ease: 'easeInOut' }}
+                    aria-label={`Focus ${step.title}`}
+                  >
+                    <span className="runner-gate-inner" />
+                  </motion.button>
+                );
+              })}
             </div>
 
-            <div className="run-status-panel">
-              <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">
-                {isRunning ? 'Run in progress' : 'Run ready'}
-              </p>
-              <h3 className="mt-2 font-display text-2xl uppercase tracking-[0.06em] text-white">
-                {runnerSteps[activeStep].title}
-              </h3>
-              <p className="mt-3 text-sm leading-7 text-slate-300">{runnerSteps[activeStep].detail}</p>
+            <motion.div
+              className={`runner-character ${isRunning ? 'runner-character-running' : ''} ${hasStartedRun ? 'runner-character-visible' : ''}`}
+              animate={{ left: progressPercent }}
+              transition={{ duration: 0.85, ease: 'easeInOut' }}
+            >
+              <div className="runner-shadow" />
+              <div className="runner-body">
+                <span className="runner-head" />
+                <span className="runner-torso" />
+                <span className="runner-arm runner-arm-left" />
+                <span className="runner-arm runner-arm-right" />
+                <span className="runner-leg runner-leg-left" />
+                <span className="runner-leg runner-leg-right" />
+              </div>
+            </motion.div>
+
+            {!hasStartedRun && (
+              <div className="run-launch-panel">
+                <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">Launch Sequence</p>
+                <h3 className="mt-2 font-display text-3xl uppercase tracking-[0.06em] text-white">
+                  Enter The Space Run
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-slate-300">
+                  Spawn the runner, dive into the tunnel, and travel through the story of your work in motion.
+                </p>
+                <button type="button" onClick={startRun} className="action-btn mt-6">
+                  Start Run
+                </button>
+              </div>
+            )}
+
+            {hasStartedRun && (
+              <div className="run-status-panel">
+                <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">
+                  {isRunning ? 'Run in progress' : 'Run complete'}
+                </p>
+                <h3 className="mt-2 font-display text-2xl uppercase tracking-[0.06em] text-white">
+                  {runnerSteps[activeStep].title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-slate-300">{runnerSteps[activeStep].detail}</p>
+              </div>
+            )}
+
+            <div className="scene-progress">
+              <div className="progress-line" />
+              <div className="progress-fill" style={{ width: progressPercent }} />
             </div>
           </div>
 

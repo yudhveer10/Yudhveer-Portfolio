@@ -285,12 +285,13 @@ button {
 
 .runner-road {
   position: relative;
-  height: 430px;
+  height: 560px;
   overflow: hidden;
   border-radius: 38px;
   border: 1px solid rgba(129, 181, 255, 0.18);
   background:
     radial-gradient(circle at center top, rgba(114, 246, 255, 0.08), transparent 30%),
+    radial-gradient(circle at center, rgba(87, 35, 162, 0.12), transparent 45%),
     linear-gradient(180deg, #13213b 0%, #0a1224 18%, #060a14 100%);
   perspective: 900px;
 }
@@ -302,12 +303,73 @@ button {
 .runner-horizon {
   position: absolute;
   left: 50%;
-  top: 86px;
+  top: 118px;
   width: min(100%, 740px);
   height: 2px;
   transform: translateX(-50%);
   background: linear-gradient(90deg, transparent, rgba(114, 246, 255, 0.85), transparent);
   box-shadow: 0 0 22px rgba(114, 246, 255, 0.5);
+}
+
+.space-glow-ring {
+  position: absolute;
+  left: 50%;
+  top: 84px;
+  width: 440px;
+  height: 180px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(114, 246, 255, 0.18), rgba(114, 246, 255, 0) 72%);
+  filter: blur(20px);
+}
+
+.space-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.space-stars::before,
+.space-stars::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  background-repeat: repeat;
+  animation: starDrift linear infinite;
+  opacity: 0.9;
+}
+
+.stars-back::before {
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.6) 0 1px, transparent 1.5px);
+  background-size: 140px 140px;
+  animation-duration: 22s;
+}
+
+.stars-back::after {
+  display: none;
+}
+
+.stars-mid::before {
+  background-image:
+    radial-gradient(circle, rgba(114, 246, 255, 0.7) 0 1.2px, transparent 1.7px);
+  background-size: 110px 110px;
+  animation-duration: 15s;
+}
+
+.stars-mid::after {
+  display: none;
+}
+
+.stars-front::before {
+  background-image:
+    radial-gradient(circle, rgba(255, 151, 77, 0.75) 0 1.3px, transparent 1.8px);
+  background-size: 90px 90px;
+  animation-duration: 10s;
+}
+
+.stars-front::after {
+  display: none;
 }
 
 .lane,
@@ -318,9 +380,9 @@ button {
 }
 
 .lane {
-  top: 76px;
+  top: 118px;
   width: 2px;
-  height: 250px;
+  height: 330px;
   background: linear-gradient(180deg, rgba(114, 246, 255, 0.2), rgba(114, 246, 255, 0));
 }
 
@@ -337,7 +399,7 @@ button {
 }
 
 .dash {
-  bottom: 70px;
+  bottom: 96px;
   width: 18px;
   height: 120px;
   border-radius: 999px;
@@ -362,20 +424,190 @@ button {
   animation-delay: 0.96s;
 }
 
-.progress-rail {
+.runner-gates {
   position: absolute;
-  left: 6%;
-  right: 6%;
-  top: 46px;
+  inset: 0;
   z-index: 3;
+}
+
+.runner-gate {
+  position: absolute;
   height: 54px;
+  width: 54px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.runner-gate-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px solid rgba(114, 246, 255, 0.55);
+  box-shadow:
+    0 0 20px rgba(114, 246, 255, 0.24),
+    inset 0 0 16px rgba(114, 246, 255, 0.18);
+  background: radial-gradient(circle, rgba(114, 246, 255, 0.18), rgba(114, 246, 255, 0));
+}
+
+.runner-gate-active .runner-gate-inner {
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 0 26px rgba(114, 246, 255, 0.55),
+    0 0 44px rgba(255, 151, 77, 0.16),
+    inset 0 0 18px rgba(114, 246, 255, 0.22);
+}
+
+.runner-gate-past .runner-gate-inner {
+  border-color: rgba(114, 246, 255, 0.3);
+}
+
+.runner-character {
+  position: absolute;
+  left: 12%;
+  bottom: 112px;
+  z-index: 5;
+  width: 90px;
+  height: 120px;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 220ms ease;
+}
+
+.runner-character-visible {
+  opacity: 1;
+}
+
+.runner-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 74px;
+  height: 18px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+  filter: blur(4px);
+}
+
+.runner-body {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  width: 58px;
+  height: 94px;
+  transform: translateX(-50%);
+}
+
+.runner-head,
+.runner-torso,
+.runner-arm,
+.runner-leg {
+  position: absolute;
+  display: block;
+  transform-origin: top center;
+}
+
+.runner-head {
+  left: 50%;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 35%, #ffffff, #8cf6ff 65%, #3aa8c0 100%);
+  box-shadow: 0 0 16px rgba(114, 246, 255, 0.55);
+}
+
+.runner-torso {
+  left: 50%;
+  top: 18px;
+  width: 22px;
+  height: 32px;
+  transform: translateX(-50%);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #9ff9ff 0%, #52dff4 40%, #0f3f63 100%);
+  box-shadow: 0 0 18px rgba(114, 246, 255, 0.22);
+}
+
+.runner-arm {
+  top: 24px;
+  width: 8px;
+  height: 28px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #95f6ff, #0e5f7b);
+}
+
+.runner-arm-left {
+  left: 15px;
+}
+
+.runner-arm-right {
+  right: 15px;
+}
+
+.runner-leg {
+  top: 46px;
+  width: 9px;
+  height: 34px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #95f6ff, #093749);
+}
+
+.runner-leg-left {
+  left: 18px;
+}
+
+.runner-leg-right {
+  right: 18px;
+}
+
+.runner-character-running .runner-arm-left,
+.runner-character-running .runner-leg-right {
+  animation: limbRunA 0.42s ease-in-out infinite;
+}
+
+.runner-character-running .runner-arm-right,
+.runner-character-running .runner-leg-left {
+  animation: limbRunB 0.42s ease-in-out infinite;
+}
+
+.runner-character-running .runner-body {
+  animation: torsoBob 0.42s ease-in-out infinite;
+}
+
+.run-launch-panel {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  z-index: 6;
+  width: min(90%, 520px);
+  transform: translate(-50%, -50%);
+  border-radius: 28px;
+  border: 1px solid rgba(129, 181, 255, 0.16);
+  background: linear-gradient(180deg, rgba(6, 12, 26, 0.78), rgba(4, 8, 18, 0.92));
+  padding: 1.5rem;
+  text-align: center;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.44);
+}
+
+.scene-progress {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 82px;
+  z-index: 2;
+  height: 4px;
 }
 
 .progress-line,
 .progress-fill {
   position: absolute;
   left: 0;
-  top: 25px;
+  top: 0;
   height: 4px;
   border-radius: 999px;
 }
@@ -390,66 +622,10 @@ button {
   box-shadow: 0 0 18px rgba(114, 246, 255, 0.35);
 }
 
-.rail-stops {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.rail-stop {
-  height: 18px;
-  width: 18px;
-  border: 0;
-  border-radius: 999px;
-  background: #142032;
-  box-shadow: inset 0 0 0 1px rgba(129, 181, 255, 0.28);
-  cursor: pointer;
-}
-
-.rail-stop-active {
-  background: white;
-  box-shadow: 0 0 0 5px rgba(114, 246, 255, 0.1), 0 0 18px rgba(114, 246, 255, 0.55);
-}
-
-.runner-token {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 4;
-  width: 52px;
-  height: 52px;
-  transform: translateX(-50%);
-  border-radius: 18px 18px 12px 12px;
-  border: 1px solid rgba(114, 246, 255, 0.45);
-  background:
-    radial-gradient(circle at top, rgba(114, 246, 255, 0.52), rgba(114, 246, 255, 0) 55%),
-    linear-gradient(180deg, rgba(114, 246, 255, 0.18), rgba(10, 15, 27, 0.9));
-  box-shadow: 0 0 35px rgba(114, 246, 255, 0.28);
-}
-
-.runner-token::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 11px;
-  width: 14px;
-  height: 14px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: white;
-  box-shadow: 0 0 16px rgba(114, 246, 255, 0.9);
-}
-
-.runner-token-running {
-  animation: tokenBounce 0.7s ease-in-out infinite;
-}
-
 .run-status-panel {
   position: absolute;
   left: 50%;
-  bottom: 24px;
+  bottom: 130px;
   width: min(90%, 560px);
   transform: translateX(-50%);
   z-index: 3;
@@ -562,6 +738,45 @@ button {
   }
   50% {
     transform: translateX(-50%) translateY(-8px);
+  }
+}
+
+@keyframes limbRunA {
+  0%,
+  100% {
+    transform: rotate(26deg);
+  }
+  50% {
+    transform: rotate(-30deg);
+  }
+}
+
+@keyframes limbRunB {
+  0%,
+  100% {
+    transform: rotate(-26deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+}
+
+@keyframes torsoBob {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-3px);
+  }
+}
+
+@keyframes starDrift {
+  0% {
+    transform: translateY(-2%) scale(1);
+  }
+  100% {
+    transform: translateY(12%) scale(1.06);
   }
 }
 
