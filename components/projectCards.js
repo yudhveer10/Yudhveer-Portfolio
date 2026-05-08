@@ -1,0 +1,42 @@
+export const projectCards = [
+  {
+    year: '2022',
+    name: 'AI Spawn Point',
+    tag: 'B.Tech AI & Data Science',
+    lane: 0,
+    xp: 120,
+    summary: 'Started the build journey with AI systems, product thinking, and experimentation momentum.',
+  },
+  {
+    year: '2024',
+    name: 'Crop Doctor',
+    tag: 'CNN product build',
+    lane: -1,
+    xp: 150,
+    summary: 'Shipped an ML-backed crop diagnosis experience with browser-friendly delivery.',
+  },
+  {
+    year: '2025',
+    name: 'Paisalo Quest',
+    tag: 'OCR + workflow automation',
+    lane: 1,
+    xp: 180,
+    summary: 'Automated internal operations with Python, OCR, and reliability-first workflow design.',
+  },
+  {
+    year: '2025',
+    name: 'Flo.AI',
+    tag: 'Agentic AI workflow engine',
+    lane: 0,
+    xp: 220,
+    summary: 'Built multi-step agentic workflows around generative AI and orchestration logic.',
+  },
+  {
+    year: '2026',
+    name: 'TechAivv',
+    tag: 'Current mission',
+    lane: -1,
+    xp: 260,
+    summary: 'Contributing to AI product experiences, polished frontend systems, and automation outcomes.',
+  },
+];

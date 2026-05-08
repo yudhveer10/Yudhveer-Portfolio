@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   ArrowRight,
   BrainCircuit,
@@ -17,44 +17,13 @@ import {
   Trophy,
   Zap,
 } from 'lucide-react';
+import SpaceRun from '@/components/SpaceRun';
+import { projectCards as runTimeline } from '@/components/projectCards';
 
 const quickStats = [
   { label: 'XP', value: '300+', note: 'LeetCode problems solved' },
   { label: 'Current Quest', value: 'TechAivv', note: 'Current role, NDA-safe summary', compact: true },
   { label: 'Build Focus', value: 'Agentic AI', note: 'Full stack product systems' },
-];
-
-const runnerSteps = [
-  {
-    year: '2022',
-    title: 'Spawned Into AI & Data Science',
-    description: 'Started B.Tech at VIPS with a strong focus on applied AI and product building.',
-    detail: 'Foundation unlocked: data systems, AI concepts, and product mindset.',
-    color: 'cyan',
-  },
-  {
-    year: '2025',
-    title: 'Paisalo Side Quest',
-    description: 'Automated internal workflows with Python, OCR, and pipeline scheduling.',
-    detail: 'Reward earned: workflow automation, reliability improvements, and backend confidence.',
-    color: 'orange',
-  },
-  {
-    year: '2025',
-    title: 'Flo.AI Active Build',
-    description: 'Building agentic workflows and multi-step automation systems around generative AI.',
-    detail: 'Boss mechanics unlocked: orchestration, reasoning chains, and AI-first product design.',
-    color: 'cyan',
-  },
-  {
-    year: 'Now',
-    title: 'TechAivv Current Mission',
-    description:
-      'Currently contributing to AI product experiences, responsive frontend systems, and workflow-focused platform features.',
-    detail:
-      'NDA-safe summary: focusing on scalable product work, interface quality, and automation outcomes without exposing internal implementation details.',
-    color: 'orange',
-  },
 ];
 
 const projects = [
@@ -110,61 +79,21 @@ function SectionTitle({ tag, title, text }) {
 }
 
 export default function Home() {
-  const runSectionRef = useRef(null);
-  const runTimerRef = useRef(null);
-  const focusTimerRef = useRef(null);
-  const [isRunning, setIsRunning] = useState(false);
-  const [activeStep, setActiveStep] = useState(0);
-  const [hasStartedRun, setHasStartedRun] = useState(false);
+  const heroRef = useRef(null);
+  const [spaceRunActive, setSpaceRunActive] = useState(false);
 
   const startRun = () => {
-    if (runTimerRef.current) {
-      window.clearInterval(runTimerRef.current);
-      runTimerRef.current = null;
-    }
-    if (focusTimerRef.current) {
-      window.clearTimeout(focusTimerRef.current);
-      focusTimerRef.current = null;
-    }
-
-    runSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setHasStartedRun(true);
-    setIsRunning(true);
-    setActiveStep(0);
-
-    let step = 0;
-    runTimerRef.current = window.setInterval(() => {
-      step += 1;
-      if (step >= runnerSteps.length) {
-        window.clearInterval(runTimerRef.current);
-        runTimerRef.current = null;
-        setActiveStep(runnerSteps.length - 1);
-        setIsRunning(false);
-        focusTimerRef.current = window.setTimeout(() => {
-          runSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 250);
-        return;
-      }
-      setActiveStep(step);
-    }, 1400);
+    setSpaceRunActive(true);
   };
-
-  useEffect(() => {
-    return () => {
-      if (runTimerRef.current) {
-        window.clearInterval(runTimerRef.current);
-      }
-      if (focusTimerRef.current) {
-        window.clearTimeout(focusTimerRef.current);
-      }
-    };
-  }, []);
-
-  const progressPercent =
-    runnerSteps.length > 1 ? `${(activeStep / (runnerSteps.length - 1)) * 100}%` : '0%';
 
   return (
     <main className="game-shell">
+      <SpaceRun
+        active={spaceRunActive}
+        cards={runTimeline}
+        heroRef={heroRef}
+        onClose={() => setSpaceRunActive(false)}
+      />
       <div className="arena-bg" />
 
       <header className="topbar">
@@ -187,6 +116,7 @@ export default function Home() {
       </header>
 
       <section id="home" className="hero-wrap">
+        <div ref={heroRef} className="contents">
         <div className="hero-copy">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -203,8 +133,8 @@ export default function Home() {
               Journey
             </h1>
             <p className="max-w-2xl text-lg leading-8 text-slate-300">
-              Full stack AI developer building fast, smart products. This portfolio is shaped like a live run:
-              milestones as tracks, projects as levels, and experience as visible progress.
+              Full stack AI developer building fast, smart products. Hit START RUN to dive into a fullscreen
+              Temple Run style timeline where projects become collectibles and career checkpoints become the track.
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -281,120 +211,46 @@ export default function Home() {
             </div>
           </div>
         </motion.div>
+        </div>
       </section>
 
-      <section id="run" ref={runSectionRef} className="section-block">
+      <section id="run" className="section-block">
         <SectionTitle
           tag="Run Timeline"
-          title="Start the run and move through deep-space checkpoints"
-          text="The run now starts inside the scene itself. A character appears on the track, runs through a space tunnel, and carries the story forward checkpoint by checkpoint with NDA-safe TechAivv language."
+          title="Career checkpoints loaded as unlockable run cards"
+          text="The fullscreen sequence spawns these milestones as floating project cards inside the tunnel. Each one carries the next chapter of the build journey and adds XP when collected."
         />
 
         <div className="runner-stage">
-          <div className={`runner-road ${isRunning ? 'runner-road-active' : ''}`}>
-            <div className="space-stars stars-back" />
-            <div className="space-stars stars-mid" />
-            <div className="space-stars stars-front" />
-            <div className="runner-horizon" />
-            <div className="space-glow-ring" />
-            <div className="lane lane-left" />
-            <div className="lane lane-mid" />
-            <div className="lane lane-right" />
-            <div className="dash dash-1" />
-            <div className="dash dash-2" />
-            <div className="dash dash-3" />
-
-            <div className="runner-gates">
-              {runnerSteps.map((step, index) => {
-                const depth = Math.abs(index - activeStep);
-                const isPast = index < activeStep;
-                const isCurrent = index === activeStep;
-
-                return (
-                  <motion.button
-                    key={`${step.year}-${step.title}-gate`}
-                    type="button"
-                    onClick={() => setActiveStep(index)}
-                    className={`runner-gate ${isCurrent ? 'runner-gate-active' : ''} ${isPast ? 'runner-gate-past' : ''}`}
-                    animate={{
-                      left: `${12 + index * 25}%`,
-                      top: `${78 - depth * 12}%`,
-                      scale: isCurrent ? 1.16 : Math.max(0.68, 1 - depth * 0.12),
-                      opacity: isPast ? 0.35 : 1 - depth * 0.12,
-                    }}
-                    transition={{ duration: 0.75, ease: 'easeInOut' }}
-                    aria-label={`Focus ${step.title}`}
-                  >
-                    <span className="runner-gate-inner" />
-                  </motion.button>
-                );
-              })}
-            </div>
-
-            <motion.div
-              className={`runner-character ${isRunning ? 'runner-character-running' : ''} ${hasStartedRun ? 'runner-character-visible' : ''}`}
-              animate={{ left: progressPercent }}
-              transition={{ duration: 0.85, ease: 'easeInOut' }}
-            >
-              <div className="runner-shadow" />
-              <div className="runner-body">
-                <span className="runner-head" />
-                <span className="runner-torso" />
-                <span className="runner-arm runner-arm-left" />
-                <span className="runner-arm runner-arm-right" />
-                <span className="runner-leg runner-leg-left" />
-                <span className="runner-leg runner-leg-right" />
-              </div>
-            </motion.div>
-
-            {!hasStartedRun && (
-              <div className="run-launch-panel">
-                <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">Launch Sequence</p>
-                <h3 className="mt-2 font-display text-3xl uppercase tracking-[0.06em] text-white">
-                  Enter The Space Run
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-slate-300">
-                  Spawn the runner, dive into the tunnel, and travel through the story of your work in motion.
-                </p>
-                <button type="button" onClick={startRun} className="action-btn mt-6">
-                  Start Run
-                </button>
-              </div>
-            )}
-
-            {hasStartedRun && (
-              <div className="run-status-panel">
-                <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">
-                  {isRunning ? 'Run in progress' : 'Run complete'}
-                </p>
-                <h3 className="mt-2 font-display text-2xl uppercase tracking-[0.06em] text-white">
-                  {runnerSteps[activeStep].title}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-slate-300">{runnerSteps[activeStep].detail}</p>
-              </div>
-            )}
-
-            <div className="scene-progress">
-              <div className="progress-line" />
-              <div className="progress-fill" style={{ width: progressPercent }} />
-            </div>
+          <div className="run-launch-panel relative mx-auto min-h-[280px] w-full max-w-5xl">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">Launch Sequence</p>
+            <h3 className="mt-2 font-display text-3xl uppercase tracking-[0.06em] text-white md:text-4xl">
+              Fullscreen tunnel run through the builder timeline
+            </h3>
+            <p className="mt-3 text-sm leading-7 text-slate-300">
+              Countdown. character spawn. tunnel dive. collectible project cards. XP HUD. Run it from the hero or launch it again here.
+            </p>
+            <button type="button" onClick={startRun} className="action-btn mt-6">
+              Start Run
+            </button>
           </div>
 
           <div className="checkpoint-row">
-            {runnerSteps.map((step, index) => (
+            {runTimeline.map((step, index) => (
               <motion.button
-                key={`${step.year}-${step.title}`}
+                key={`${step.year}-${step.name}`}
                 type="button"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
-                onClick={() => setActiveStep(index)}
-                className={`checkpoint checkpoint-${step.color} ${index === activeStep ? 'checkpoint-active' : ''}`}
+                onClick={startRun}
+                className={`checkpoint ${index % 2 === 0 ? 'checkpoint-cyan' : 'checkpoint-orange'} ${spaceRunActive ? 'checkpoint-active' : ''}`}
               >
                 <p className="text-[11px] uppercase tracking-[0.3em] text-slate-400">{step.year}</p>
-                <h3 className="mt-2 font-display text-2xl uppercase tracking-[0.06em] text-white">{step.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-slate-300">{step.description}</p>
+                <h3 className="mt-2 font-display text-2xl uppercase tracking-[0.06em] text-white">{step.name}</h3>
+                <p className="mt-1 text-xs uppercase tracking-[0.28em] text-cyan-300">{step.tag}</p>
+                <p className="mt-3 text-sm leading-7 text-slate-300">{step.summary}</p>
               </motion.button>
             ))}
           </div>

@@ -144,6 +144,120 @@ button {
   padding-bottom: 4rem;
 }
 
+.space-run-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+}
+
+.space-run-canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.space-run-ui {
+  font-family: var(--font-display), monospace;
+}
+
+.space-run-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.05) 0,
+    rgba(255, 255, 255, 0.05) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.space-run-hud-panel {
+  border: 1px solid rgba(0, 245, 212, 0.22);
+  background: linear-gradient(180deg, rgba(7, 14, 26, 0.86), rgba(5, 10, 18, 0.7));
+  padding: 0.9rem 1rem;
+  border-radius: 18px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.space-run-hud-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.space-run-hud-value {
+  margin-top: 0.35rem;
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+  letter-spacing: 0.16em;
+  color: #fff;
+  text-shadow: 0 0 18px rgba(0, 245, 212, 0.35);
+}
+
+.space-run-year-label {
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.space-run-floating-xp {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.22em;
+  color: #00f5d4;
+  text-shadow: 0 0 14px rgba(0, 245, 212, 0.65);
+}
+
+.space-run-countdown {
+  margin: 0;
+  font-size: clamp(3rem, 10vw, 8rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: white;
+  text-shadow:
+    0 0 18px rgba(0, 245, 212, 0.52),
+    0 0 46px rgba(0, 245, 212, 0.28);
+}
+
+.space-run-summary {
+  width: min(92vw, 720px);
+  border-radius: 28px;
+  border: 1px solid rgba(0, 245, 212, 0.24);
+  background: linear-gradient(180deg, rgba(9, 17, 30, 0.94), rgba(5, 10, 18, 0.9));
+  padding: 1.6rem;
+  text-align: center;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+}
+
+.space-run-summary-kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.34em;
+  color: #00f5d4;
+}
+
+.space-run-summary-title {
+  margin-top: 0.8rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: 0 0 18px rgba(0, 245, 212, 0.35);
+}
+
+.space-run-summary-copy {
+  margin-top: 1rem;
+  font-family: var(--font-body), sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+}
+
 .hero-copy {
   min-width: 0;
 }
