@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useRef, useState } from 'react';
 import {
   ArrowRight,
   BrainCircuit,
@@ -17,7 +16,6 @@ import {
   Trophy,
   Zap,
 } from 'lucide-react';
-import SpaceRun from '@/components/SpaceRun';
 import { projectCards as runTimeline } from '@/components/projectCards';
 
 const quickStats = [
@@ -72,28 +70,15 @@ function SectionTitle({ tag, title, text }) {
   return (
     <div className="space-y-3">
       <p className="section-tag">{tag}</p>
-      <h2 className="font-display text-3xl uppercase tracking-[0.08em] text-white sm:text-5xl">{title}</h2>
+      <h2 className="section-heading">{title}</h2>
       <p className="max-w-2xl text-base leading-7 text-slate-300">{text}</p>
     </div>
   );
 }
 
 export default function Home() {
-  const heroRef = useRef(null);
-  const [spaceRunActive, setSpaceRunActive] = useState(false);
-
-  const startRun = () => {
-    setSpaceRunActive(true);
-  };
-
   return (
     <main className="game-shell">
-      <SpaceRun
-        active={spaceRunActive}
-        cards={runTimeline}
-        heroRef={heroRef}
-        onClose={() => setSpaceRunActive(false)}
-      />
       <div className="arena-bg" />
 
       <header className="topbar">
@@ -116,7 +101,6 @@ export default function Home() {
       </header>
 
       <section id="home" className="hero-wrap">
-        <div ref={heroRef} className="contents">
         <div className="hero-copy">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -124,33 +108,33 @@ export default function Home() {
             transition={{ duration: 0.7 }}
             className="space-y-6"
           >
-            <p className="section-tag">Temple Run Style Portfolio</p>
-            <h1 className="font-display text-5xl uppercase leading-[0.88] tracking-[0.07em] text-white sm:text-7xl xl:text-[7rem]">
-              Run Through
+            <p className="section-tag">Full Stack AI Builder</p>
+            <h1 className="hero-title">
+              Building fast,
               <br />
-              My Build
+              thoughtful AI
               <br />
-              Journey
+              product experiences
             </h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-300">
-              Full stack AI developer building fast, smart products. Hit START RUN to dive into a fullscreen
-              Temple Run style timeline where projects become collectibles and career checkpoints become the track.
+            <p className="max-w-2xl text-lg leading-8 text-slate-300 md:text-xl">
+              Full stack AI developer focused on polished interfaces, smart automation, and products that feel clear,
+              reliable, and alive. The portfolio keeps the energy, but presents the work with cleaner structure.
             </p>
 
             <div className="flex flex-wrap gap-4">
               <a href="/Yudhveer_resume2.pdf" target="_blank" rel="noreferrer" className="action-btn">
                 Open Resume
               </a>
-              <button type="button" onClick={startRun} className="ghost-btn">
-                Start Run
-              </button>
+              <a href="#run" className="ghost-btn">
+                Explore Journey
+              </a>
             </div>
 
             <div className="hero-stats">
               {quickStats.map((stat) => (
                 <div key={stat.label} className="stat-card">
                   <p className="text-[11px] uppercase tracking-[0.32em] text-slate-500">{stat.label}</p>
-                  <p className={`mt-2 font-display uppercase text-white ${stat.compact ? 'stat-value-compact' : 'stat-value'}`}>
+                  <p className={`mt-2 stat-number text-white ${stat.compact ? 'stat-value-compact' : 'stat-value'}`}>
                     {stat.value}
                   </p>
                   <p className="mt-2 text-sm text-slate-400">{stat.note}</p>
@@ -202,7 +186,7 @@ export default function Home() {
             <div className="profile-overlay">
               <div>
                 <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">Player</p>
-                <p className="font-display text-2xl uppercase tracking-[0.08em] text-white">Yudhveer Singh Panwar</p>
+                <p className="text-2xl font-semibold tracking-[0.02em] text-white">Yudhveer Singh Panwar</p>
               </div>
               <div>
                 <p className="text-[11px] uppercase tracking-[0.3em] text-slate-400">Class</p>
@@ -211,47 +195,42 @@ export default function Home() {
             </div>
           </div>
         </motion.div>
-        </div>
       </section>
 
       <section id="run" className="section-block">
         <SectionTitle
-          tag="Run Timeline"
-          title="Career checkpoints loaded as unlockable run cards"
-          text="The fullscreen sequence spawns these milestones as floating project cards inside the tunnel. Each one carries the next chapter of the build journey and adds XP when collected."
+          tag="Journey"
+          title="A clearer timeline through the work"
+          text="The game energy stays in the visual language, but the story is presented in a more focused, professional way with milestone cards that are easier to read and scan."
         />
 
         <div className="runner-stage">
           <div className="run-launch-panel relative mx-auto min-h-[280px] w-full max-w-5xl">
-            <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">Launch Sequence</p>
-            <h3 className="mt-2 font-display text-3xl uppercase tracking-[0.06em] text-white md:text-4xl">
-              Fullscreen tunnel run through the builder timeline
+            <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">Career Snapshot</p>
+            <h3 className="run-panel-title">
+              From AI foundations to product-focused execution
             </h3>
-            <p className="mt-3 text-sm leading-7 text-slate-300">
-              Countdown. character spawn. tunnel dive. collectible project cards. XP HUD. Run it from the hero or launch it again here.
+            <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+              The portfolio now highlights progression with calmer hierarchy: strong milestones, readable context, and
+              a more polished visual rhythm across the page.
             </p>
-            <button type="button" onClick={startRun} className="action-btn mt-6">
-              Start Run
-            </button>
           </div>
 
           <div className="checkpoint-row">
             {runTimeline.map((step, index) => (
-              <motion.button
+              <motion.article
                 key={`${step.year}-${step.name}`}
-                type="button"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.45, delay: index * 0.08 }}
-                onClick={startRun}
-                className={`checkpoint ${index % 2 === 0 ? 'checkpoint-cyan' : 'checkpoint-orange'} ${spaceRunActive ? 'checkpoint-active' : ''}`}
+                className={`checkpoint ${index % 2 === 0 ? 'checkpoint-cyan' : 'checkpoint-orange'}`}
               >
                 <p className="text-[11px] uppercase tracking-[0.3em] text-slate-400">{step.year}</p>
-                <h3 className="mt-2 font-display text-2xl uppercase tracking-[0.06em] text-white">{step.name}</h3>
+                <h3 className="checkpoint-title">{step.name}</h3>
                 <p className="mt-1 text-xs uppercase tracking-[0.28em] text-cyan-300">{step.tag}</p>
                 <p className="mt-3 text-sm leading-7 text-slate-300">{step.summary}</p>
-              </motion.button>
+              </motion.article>
             ))}
           </div>
         </div>
@@ -316,7 +295,7 @@ export default function Home() {
                   <div className="skill-icon">
                     <Icon className="h-5 w-5 text-cyan-300" />
                   </div>
-                  <h3 className="font-display text-2xl uppercase tracking-[0.06em] text-white">{lane.title}</h3>
+                  <h3 className="text-2xl font-semibold tracking-[0.01em] text-white">{lane.title}</h3>
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-2">
