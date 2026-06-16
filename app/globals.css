@@ -9,6 +9,7 @@
   --cyan-soft: rgba(114, 246, 255, 0.18);
   --orange: #ff974d;
   --orange-soft: rgba(255, 151, 77, 0.2);
+  --violet: #a78bfa;
   --panel: rgba(10, 16, 30, 0.9);
   --line: rgba(129, 181, 255, 0.16);
 }
@@ -63,6 +64,7 @@ button {
 
 .game-shell {
   position: relative;
+  isolation: isolate;
 }
 
 .arena-bg {
@@ -73,6 +75,17 @@ button {
     linear-gradient(90deg, rgba(114, 246, 255, 0.04) 1px, transparent 1px);
   background-size: 52px 52px;
   mask-image: radial-gradient(circle at center, black 48%, transparent 100%);
+  pointer-events: none;
+}
+
+.game-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(120deg, transparent 0%, rgba(114, 246, 255, 0.04) 42%, transparent 62%),
+    radial-gradient(circle at 50% 0%, rgba(167, 139, 250, 0.11), transparent 34%);
   pointer-events: none;
 }
 
@@ -99,8 +112,30 @@ button {
   gap: 1rem;
   padding: 1.25rem 1.25rem;
   border-bottom: 1px solid rgba(129, 181, 255, 0.14);
-  background: rgba(3, 7, 16, 0.76);
+  background: rgba(3, 7, 16, 0.82);
   backdrop-filter: blur(14px);
+}
+
+.topbar nav a {
+  position: relative;
+  transition: color 180ms ease;
+}
+
+.topbar nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.45rem;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: center;
+  background: linear-gradient(90deg, var(--cyan), var(--orange));
+  transition: transform 180ms ease;
+}
+
+.topbar nav a:hover::after {
+  transform: scaleX(1);
 }
 
 .action-btn,
@@ -121,7 +156,9 @@ button {
 
 .action-btn {
   border: 1px solid rgba(114, 246, 255, 0.55);
-  background: linear-gradient(135deg, rgba(114, 246, 255, 0.18), rgba(114, 246, 255, 0.08));
+  background:
+    linear-gradient(135deg, rgba(114, 246, 255, 0.22), rgba(114, 246, 255, 0.08)),
+    rgba(8, 15, 28, 0.88);
   box-shadow: 0 0 0 1px rgba(114, 246, 255, 0.08), 0 14px 40px rgba(0, 0, 0, 0.28);
 }
 
@@ -164,6 +201,7 @@ button {
   line-height: 0.92;
   letter-spacing: 0;
   color: white;
+  text-wrap: balance;
 }
 
 .section-tag {
@@ -185,6 +223,30 @@ button {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
+.proof-strip {
+  display: grid;
+  gap: 0.75rem;
+  border-left: 1px solid rgba(114, 246, 255, 0.42);
+  padding-left: 1rem;
+}
+
+.proof-item {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.proof-item p {
+  color: rgb(148 163 184);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.proof-item strong {
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
 .stat-card,
 .project-card,
 .skill-card,
@@ -197,6 +259,20 @@ button {
   border: 1px solid var(--line);
   background: linear-gradient(180deg, rgba(11, 17, 32, 0.92), rgba(7, 11, 23, 0.92));
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.3);
+}
+
+.stat-card::after,
+.skill-card::after,
+.project-card::after,
+.checkpoint::after,
+.contact-copy::after,
+.contact-form::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 32%);
+  opacity: 0.45;
+  pointer-events: none;
 }
 
 .stat-card,
@@ -213,6 +289,15 @@ button {
   border-radius: 8px;
   padding: 1.4rem;
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--cyan), var(--orange));
+  opacity: 0.78;
 }
 
 .project-card:hover {
@@ -245,6 +330,13 @@ button {
   border: 1px solid rgba(129, 181, 255, 0.14);
   background: rgba(255, 255, 255, 0.03);
   padding: 0.7rem 1rem;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.social-link:hover {
+  transform: translateY(-1px);
+  border-color: rgba(114, 246, 255, 0.32);
+  background: rgba(114, 246, 255, 0.06);
 }
 
 .hero-visual {
@@ -263,6 +355,15 @@ button {
     radial-gradient(circle at top, rgba(114, 246, 255, 0.12), transparent 35%),
     linear-gradient(180deg, rgba(11, 21, 38, 0.96), rgba(7, 11, 23, 0.98));
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+}
+
+.profile-frame::before {
+  content: '';
+  position: absolute;
+  inset: 1rem;
+  z-index: 0;
+  border: 1px solid rgba(114, 246, 255, 0.12);
+  pointer-events: none;
 }
 
 .profile-halo {
@@ -302,6 +403,25 @@ button {
   backdrop-filter: blur(12px);
 }
 
+.profile-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: fit-content;
+  border: 1px solid rgba(114, 246, 255, 0.2);
+  background: rgba(114, 246, 255, 0.08);
+  padding: 0.45rem 0.7rem;
+  color: rgb(203 213 225);
+  font-size: 0.78rem;
+}
+
+.profile-status span {
+  height: 0.48rem;
+  width: 0.48rem;
+  background: var(--cyan);
+  box-shadow: 0 0 18px rgba(114, 246, 255, 0.8);
+}
+
 .runner-stage {
   margin-top: 2.5rem;
 }
@@ -331,6 +451,49 @@ button {
   display: grid;
   gap: 1rem;
   margin-top: 1.5rem;
+}
+
+.build-loop {
+  display: grid;
+  gap: 2rem;
+  border: 1px solid rgba(129, 181, 255, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(114, 246, 255, 0.08), transparent 42%),
+    linear-gradient(180deg, rgba(10, 16, 30, 0.88), rgba(5, 8, 20, 0.92));
+  padding: 1.4rem;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+}
+
+.build-steps {
+  display: grid;
+  gap: 1rem;
+}
+
+.build-step {
+  position: relative;
+  border-top: 1px solid rgba(129, 181, 255, 0.16);
+  padding-top: 1rem;
+}
+
+.step-number {
+  color: var(--orange);
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.82rem;
+}
+
+.build-step h3 {
+  margin-top: 0.4rem;
+  color: white;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.build-step p {
+  margin-top: 0.5rem;
+  color: rgb(203 213 225);
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
 
 .checkpoint {
@@ -389,6 +552,38 @@ button {
   color: rgb(203 213 225);
 }
 
+.project-meta {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  border-top: 1px solid rgba(129, 181, 255, 0.12);
+  padding-top: 1rem;
+}
+
+.project-meta span {
+  color: rgb(226 232 240);
+  font-size: 0.86rem;
+}
+
+.project-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  height: 2.25rem;
+  width: 2.25rem;
+  border: 1px solid rgba(255, 151, 77, 0.35);
+  background: rgba(255, 151, 77, 0.08);
+  color: rgb(253 186 116);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.project-card:hover .project-arrow {
+  transform: translateX(3px);
+  border-color: rgba(255, 151, 77, 0.6);
+}
+
 .skill-icon {
   display: inline-flex;
   align-items: center;
@@ -439,12 +634,30 @@ button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .proof-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-left: 0;
+    border-top: 1px solid rgba(114, 246, 255, 0.22);
+    padding-top: 1rem;
+    padding-left: 0;
+  }
+
   .projects-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .checkpoint-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .build-loop {
+    grid-template-columns: 0.82fr 1.18fr;
+    align-items: start;
+    padding: 2rem;
+  }
+
+  .build-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -464,5 +677,27 @@ button {
   .topbar {
     padding-left: 3rem;
     padding-right: 3rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .topbar {
+    align-items: flex-start;
+  }
+
+  .topbar .action-btn {
+    min-height: 42px;
+    padding: 0 0.85rem;
+    font-size: 0.72rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.65rem, 15vw, 3.8rem);
+  }
+
+  .profile-overlay {
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
   }
 }

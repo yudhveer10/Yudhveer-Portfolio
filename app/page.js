@@ -24,6 +24,12 @@ const quickStats = [
   { label: 'Build Focus', value: 'Agentic AI', note: 'Full stack product systems' },
 ];
 
+const proofPoints = [
+  { label: 'Primary Stack', value: 'Next.js + Python + AI APIs' },
+  { label: 'Design Edge', value: 'Game-feel interfaces with clean UX' },
+  { label: 'Delivery Style', value: 'Prototype fast, polish carefully' },
+];
+
 const projects = [
   {
     title: 'Flo.AI',
@@ -31,6 +37,7 @@ const projects = [
     description:
       'Agentic AI workflow engine using Gemini 2.5 for long-form, multi-step automation and real-time decision systems.',
     tags: ['15+ step workflows', '98% success rate', '60% lower latency'],
+    meta: ['Agentic AI', 'Workflow Engine', 'Gemini 2.5'],
     link: 'https://github.com/yudhveer10',
   },
   {
@@ -39,6 +46,7 @@ const projects = [
     description:
       'CNN-based crop disease detection app trained on 5,000+ annotated images with fast browser-side delivery of results.',
     tags: ['95% validation accuracy', '10 disease classes', 'Under 2s results'],
+    meta: ['Computer Vision', 'CNN', 'AgriTech'],
     link: 'https://github.com/yudhveer10/tomato-plant-disease-detection',
   },
   {
@@ -47,6 +55,7 @@ const projects = [
     description:
       'Flask app for diabetes prediction using synthetic-data-assisted modeling to improve robustness.',
     tags: ['GAN-assisted data', 'Flask app', 'Prediction workflow'],
+    meta: ['Health Tech', 'Flask', 'ML Modeling'],
     link: 'https://github.com/yudhveer10/Glucopredict',
   },
   {
@@ -55,15 +64,51 @@ const projects = [
     description:
       'Face recognition, liveness detection, and identity verification combined into a secure web-based prototype.',
     tags: ['WebRTC', 'Face recognition', 'Liveness checks'],
+    meta: ['Identity', 'WebRTC', 'Security UX'],
     link: 'https://github.com/aarinbadola/Authentication-proj',
   },
 ];
 
 const skillLanes = [
-  { icon: Code2, title: 'Frontend Speed', items: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript'] },
-  { icon: BrainCircuit, title: 'AI Powerups', items: ['Agentic AI', 'LLMs', 'TensorFlow/Keras', 'CNNs'] },
-  { icon: Zap, title: 'Backend Mechanics', items: ['Python', 'Express.js', 'MongoDB', 'Redis'] },
-  { icon: Rocket, title: 'Deploy Engine', items: ['AWS', 'Docker', 'Kubernetes', 'CI/CD'] },
+  {
+    icon: Code2,
+    title: 'Frontend Speed',
+    text: 'Responsive product screens with motion, polish, and readable hierarchy.',
+    items: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript'],
+  },
+  {
+    icon: BrainCircuit,
+    title: 'AI Powerups',
+    text: 'Model-backed workflows, vision systems, and agentic product logic.',
+    items: ['Agentic AI', 'LLMs', 'TensorFlow/Keras', 'CNNs'],
+  },
+  {
+    icon: Zap,
+    title: 'Backend Mechanics',
+    text: 'APIs, data flows, queues, and reliability-minded service design.',
+    items: ['Python', 'Express.js', 'MongoDB', 'Redis'],
+  },
+  {
+    icon: Rocket,
+    title: 'Deploy Engine',
+    text: 'Shipping-ready systems with cloud, containers, and release discipline.',
+    items: ['AWS', 'Docker', 'Kubernetes', 'CI/CD'],
+  },
+];
+
+const buildLoop = [
+  {
+    title: 'Map the player path',
+    text: 'Clarify the user flow, success moment, and the smallest product loop worth shipping.',
+  },
+  {
+    title: 'Build the core mechanic',
+    text: 'Turn AI, data, and interface pieces into a working prototype with real feedback.',
+  },
+  {
+    title: 'Polish the feel',
+    text: 'Tighten hierarchy, motion, responsiveness, copy, and edge cases until it feels dependable.',
+  },
 ];
 
 function SectionTitle({ tag, title, text }) {
@@ -165,6 +210,15 @@ export default function Home() {
                 LeetCode
               </a>
             </div>
+
+            <div className="proof-strip">
+              {proofPoints.map((point) => (
+                <div key={point.label} className="proof-item">
+                  <p>{point.label}</p>
+                  <strong>{point.value}</strong>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </div>
 
@@ -192,6 +246,10 @@ export default function Home() {
               <div>
                 <p className="text-[11px] uppercase text-slate-400">Role</p>
                 <p className="text-sm text-slate-200">Full Stack AI Developer</p>
+              </div>
+              <div className="profile-status">
+                <span />
+                Available for AI product builds
               </div>
             </div>
           </div>
@@ -237,6 +295,25 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section-block">
+        <div className="build-loop">
+          <div>
+            <p className="section-tag">Build Loop</p>
+            <h2 className="section-heading">How I turn ideas into playable products</h2>
+          </div>
+
+          <div className="build-steps">
+            {buildLoop.map((step, index) => (
+              <article key={step.title} className="build-step">
+                <span className="step-number">0{index + 1}</span>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="projects" className="section-block">
         <SectionTitle
           tag="Project Levels"
@@ -263,10 +340,18 @@ export default function Home() {
                   <p className="text-[11px] uppercase text-cyan-300">{project.type}</p>
                   <h3 className="mt-2 font-display text-3xl uppercase text-white">{project.title}</h3>
                 </div>
-                <ArrowRight className="mt-2 h-5 w-5 text-orange-300" />
+                <span className="project-arrow">
+                  <ArrowRight className="h-5 w-5" />
+                </span>
               </div>
 
               <p className="mt-4 text-sm leading-7 text-slate-300">{project.description}</p>
+
+              <div className="project-meta">
+                {project.meta.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
 
               <div className="mt-6 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
@@ -298,6 +383,8 @@ export default function Home() {
                   </div>
                   <h3 className="text-2xl font-semibold text-white">{lane.title}</h3>
                 </div>
+
+                <p className="mt-4 text-sm leading-7 text-slate-300">{lane.text}</p>
 
                 <div className="mt-6 flex flex-wrap gap-2">
                   {lane.items.map((item) => (
