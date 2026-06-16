@@ -275,6 +275,27 @@ export default function Home() {
             </p>
           </div>
 
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.6 }}
+            className="journey-illustration"
+          >
+            <Image
+              src="/journey-illustration.png"
+              alt="Illustrated career journey path with AI, code, automation, product, and launch checkpoints"
+              width={1792}
+              height={1024}
+              className="journey-img"
+            />
+            <div className="journey-caption">
+              <span>AI Foundations</span>
+              <span>Product Systems</span>
+              <span>Launch Energy</span>
+            </div>
+          </motion.div>
+
           <div className="checkpoint-row">
             {runTimeline.map((step, index) => (
               <motion.article
@@ -285,6 +306,9 @@ export default function Home() {
                 transition={{ duration: 0.45, delay: index * 0.08 }}
                 className={`checkpoint ${index % 2 === 0 ? 'checkpoint-cyan' : 'checkpoint-orange'}`}
               >
+                <div className="checkpoint-visual">
+                  <span>{index + 1}</span>
+                </div>
                 <p className="text-[11px] uppercase text-slate-400">{step.year}</p>
                 <h3 className="checkpoint-title">{step.name}</h3>
                 <p className="mt-1 text-xs uppercase text-cyan-300">{step.tag}</p>
