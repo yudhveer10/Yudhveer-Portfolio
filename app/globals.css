@@ -542,6 +542,115 @@ button {
   display: none;
 }
 
+.journey-map-points {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.journey-map-point {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: min(19vw, 210px);
+  transform: translate(-50%, -50%);
+}
+
+.map-node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  height: 2.15rem;
+  width: 2.15rem;
+  border: 1px solid rgba(114, 246, 255, 0.48);
+  background: rgba(3, 7, 16, 0.84);
+  color: var(--cyan);
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.78rem;
+  box-shadow: 0 0 22px rgba(114, 246, 255, 0.28);
+}
+
+.map-card {
+  min-width: 0;
+  border: 1px solid rgba(129, 181, 255, 0.18);
+  background: linear-gradient(180deg, rgba(3, 7, 16, 0.86), rgba(3, 7, 16, 0.62));
+  padding: 0.65rem 0.7rem;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+}
+
+.map-card p,
+.map-card small {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.map-card p {
+  color: rgb(148 163 184);
+  font-size: 0.68rem;
+}
+
+.map-card strong {
+  display: block;
+  margin-top: 0.18rem;
+  overflow: hidden;
+  color: white;
+  font-size: clamp(0.95rem, 1.15vw, 1.18rem);
+  font-weight: 700;
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.map-card small {
+  display: block;
+  margin-top: 0.3rem;
+  overflow: hidden;
+  color: var(--cyan);
+  font-size: 0.66rem;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.map-point-orange .map-node {
+  border-color: rgba(255, 151, 77, 0.52);
+  color: rgb(253 186 116);
+  box-shadow: 0 0 22px rgba(255, 151, 77, 0.22);
+}
+
+.map-point-orange .map-card small {
+  color: rgb(253 186 116);
+}
+
+.journey-map-point:nth-child(1) {
+  left: 11%;
+  top: 45%;
+}
+
+.journey-map-point:nth-child(2) {
+  left: 25%;
+  top: 28%;
+}
+
+.journey-map-point:nth-child(3) {
+  left: 40%;
+  top: 50%;
+}
+
+.journey-map-point:nth-child(4) {
+  left: 61%;
+  top: 43%;
+}
+
+.journey-map-point:nth-child(5) {
+  left: 83%;
+  top: 31%;
+}
+
 .build-loop {
   display: grid;
   gap: 2rem;
@@ -874,6 +983,32 @@ button {
 
   .journey-route {
     display: none;
+  }
+
+  .journey-map-points {
+    position: relative;
+    inset: auto;
+    display: grid;
+    gap: 0.65rem;
+    padding: 0 0.85rem 0.85rem;
+    background: rgba(3, 7, 16, 0.72);
+  }
+
+  .journey-map-point {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    width: 100%;
+    transform: none;
+  }
+
+  .map-card {
+    flex: 1;
+  }
+
+  .map-card strong,
+  .map-card small {
+    white-space: normal;
   }
 }
 

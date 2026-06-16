@@ -307,9 +307,23 @@ export default function Home() {
               />
             </svg>
             <div className="journey-caption">
-              <span>AI Foundations</span>
-              <span>Product Systems</span>
-              <span>Launch Energy</span>
+              <span>Live Journey Map</span>
+              <span>{runTimeline.length} milestones</span>
+            </div>
+            <div className="journey-map-points">
+              {runTimeline.map((step, index) => (
+                <div
+                  key={`map-${step.year}-${step.name}`}
+                  className={`journey-map-point ${index % 2 === 0 ? 'map-point-cyan' : 'map-point-orange'}`}
+                >
+                  <span className="map-node">{index + 1}</span>
+                  <div className="map-card">
+                    <p>{step.year}</p>
+                    <strong>{step.name}</strong>
+                    <small>{step.tag}</small>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
 
