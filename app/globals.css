@@ -85,7 +85,7 @@ button {
   font-size: clamp(2rem, 4vw, 3.6rem);
   font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   color: white;
 }
 
@@ -113,7 +113,7 @@ button {
   padding: 0 1.25rem;
   font-family: var(--font-display), sans-serif;
   font-size: 0.88rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0;
   text-transform: uppercase;
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
   cursor: pointer;
@@ -162,13 +162,13 @@ button {
   font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 700;
   line-height: 0.92;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
   color: white;
 }
 
 .section-tag {
   font-size: 0.78rem;
-  letter-spacing: 0.35em;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--cyan);
 }
@@ -205,12 +205,12 @@ button {
 .contact-form,
 .checkpoint,
 .run-status-panel {
-  border-radius: 24px;
+  border-radius: 8px;
   padding: 1.2rem;
 }
 
 .project-card {
-  border-radius: 28px;
+  border-radius: 8px;
   padding: 1.4rem;
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
@@ -223,13 +223,13 @@ button {
 .stat-value {
   font-size: clamp(2.2rem, 4vw, 3rem);
   line-height: 0.95;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
 }
 
 .stat-value-compact {
   font-size: clamp(1.8rem, 3.2vw, 2.4rem);
   line-height: 0.95;
-  letter-spacing: 0.03em;
+  letter-spacing: 0;
 }
 
 .stat-number {
@@ -257,7 +257,7 @@ button {
   margin: 0 auto;
   width: min(100%, 460px);
   aspect-ratio: 4 / 5;
-  border-radius: 34px;
+  border-radius: 14px;
   border: 1px solid rgba(114, 246, 255, 0.24);
   background:
     radial-gradient(circle at top, rgba(114, 246, 255, 0.12), transparent 35%),
@@ -295,7 +295,7 @@ button {
   z-index: 2;
   display: grid;
   gap: 0.75rem;
-  border-radius: 22px;
+  border-radius: 8px;
   border: 1px solid rgba(129, 181, 255, 0.14);
   background: linear-gradient(180deg, rgba(3, 7, 16, 0.35), rgba(3, 7, 16, 0.9));
   padding: 1rem;
@@ -308,7 +308,7 @@ button {
 
 .run-launch-panel {
   text-align: center;
-  border-radius: 32px;
+  border-radius: 8px;
   border: 1px solid rgba(129, 181, 255, 0.16);
   background:
     radial-gradient(circle at top, rgba(114, 246, 255, 0.1), transparent 38%),
@@ -323,7 +323,7 @@ button {
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   color: white;
 }
 
@@ -350,7 +350,7 @@ button {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   color: white;
 }
 
@@ -384,7 +384,7 @@ button {
   background: rgba(255, 255, 255, 0.04);
   padding: 0.45rem 0.8rem;
   font-size: 0.74rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: rgb(203 213 225);
 }
@@ -395,14 +395,14 @@ button {
   justify-content: center;
   height: 2.8rem;
   width: 2.8rem;
-  border-radius: 16px;
+  border-radius: 8px;
   background: rgba(114, 246, 255, 0.08);
   border: 1px solid rgba(114, 246, 255, 0.22);
 }
 
 .form-field {
   width: 100%;
-  border-radius: 18px;
+  border-radius: 8px;
   border: 1px solid rgba(129, 181, 255, 0.16);
   background: rgba(255, 255, 255, 0.04);
   padding: 1rem;

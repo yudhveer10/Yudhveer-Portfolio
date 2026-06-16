@@ -20,14 +20,14 @@ import { projectCards as runTimeline } from '@/components/projectCards';
 
 const quickStats = [
   { label: 'XP', value: '300+', note: 'LeetCode problems solved' },
-  { label: 'Current Quest', value: 'TechAivv', note: 'Current role, NDA-safe summary', compact: true },
+  { label: 'Current Role', value: 'TechAivv', note: 'Professional role summary', compact: true },
   { label: 'Build Focus', value: 'Agentic AI', note: 'Full stack product systems' },
 ];
 
 const projects = [
   {
     title: 'Flo.AI',
-    type: 'Boss Level',
+    type: 'Flagship Build',
     description:
       'Agentic AI workflow engine using Gemini 2.5 for long-form, multi-step automation and real-time decision systems.',
     tags: ['15+ step workflows', '98% success rate', '60% lower latency'],
@@ -35,7 +35,7 @@ const projects = [
   },
   {
     title: 'The Crop Doctor',
-    type: 'Field Mission',
+    type: 'Field Deployment',
     description:
       'CNN-based crop disease detection app trained on 5,000+ annotated images with fast browser-side delivery of results.',
     tags: ['95% validation accuracy', '10 disease classes', 'Under 2s results'],
@@ -43,7 +43,7 @@ const projects = [
   },
   {
     title: 'GlucoPredict',
-    type: 'Health Tech Run',
+    type: 'Health Tech System',
     description:
       'Flask app for diabetes prediction using synthetic-data-assisted modeling to improve robustness.',
     tags: ['GAN-assisted data', 'Flask app', 'Prediction workflow'],
@@ -51,7 +51,7 @@ const projects = [
   },
   {
     title: 'Biometric Authentication',
-    type: 'Security Arena',
+    type: 'Security Prototype',
     description:
       'Face recognition, liveness detection, and identity verification combined into a secure web-based prototype.',
     tags: ['WebRTC', 'Face recognition', 'Liveness checks'],
@@ -83,11 +83,11 @@ export default function Home() {
 
       <header className="topbar">
         <div>
-          <p className="font-display text-lg uppercase tracking-[0.25em] text-cyan-300">YSP / Run Mode</p>
-          <p className="text-xs uppercase tracking-[0.35em] text-slate-500">Full Stack AI Builder</p>
+          <p className="font-display text-lg uppercase text-cyan-300">YSP / Portfolio</p>
+          <p className="text-xs uppercase text-slate-500">Full Stack AI Builder</p>
         </div>
 
-        <nav className="hidden gap-6 text-xs uppercase tracking-[0.28em] text-slate-400 lg:flex">
+        <nav className="hidden gap-6 text-xs uppercase text-slate-400 lg:flex">
           <a href="#home" className="hover:text-white">Home</a>
           <a href="#run" className="hover:text-white">Run Timeline</a>
           <a href="#projects" className="hover:text-white">Projects</a>
@@ -96,7 +96,7 @@ export default function Home() {
         </nav>
 
         <a href="#contact" className="action-btn">
-          Play With Me
+          Start a Project
         </a>
       </header>
 
@@ -118,7 +118,8 @@ export default function Home() {
             </h1>
             <p className="max-w-2xl text-lg leading-8 text-slate-300 md:text-xl">
               Full stack AI developer focused on polished interfaces, smart automation, and products that feel clear,
-              reliable, and alive. The portfolio keeps the energy, but presents the work with cleaner structure.
+              reliable, and alive. This portfolio keeps an arcade-inspired rhythm while presenting the work with a
+              cleaner, more professional structure.
             </p>
 
             <div className="flex flex-wrap gap-4">
@@ -133,7 +134,7 @@ export default function Home() {
             <div className="hero-stats">
               {quickStats.map((stat) => (
                 <div key={stat.label} className="stat-card">
-                  <p className="text-[11px] uppercase tracking-[0.32em] text-slate-500">{stat.label}</p>
+                  <p className="text-[11px] uppercase text-slate-500">{stat.label}</p>
                   <p className={`mt-2 stat-number text-white ${stat.compact ? 'stat-value-compact' : 'stat-value'}`}>
                     {stat.value}
                   </p>
@@ -185,11 +186,11 @@ export default function Home() {
             />
             <div className="profile-overlay">
               <div>
-                <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">Player</p>
-                <p className="text-2xl font-semibold tracking-[0.02em] text-white">Yudhveer Singh Panwar</p>
+                <p className="text-[11px] uppercase text-cyan-300">Profile</p>
+                <p className="text-2xl font-semibold text-white">Yudhveer Singh Panwar</p>
               </div>
               <div>
-                <p className="text-[11px] uppercase tracking-[0.3em] text-slate-400">Class</p>
+                <p className="text-[11px] uppercase text-slate-400">Role</p>
                 <p className="text-sm text-slate-200">Full Stack AI Developer</p>
               </div>
             </div>
@@ -201,18 +202,18 @@ export default function Home() {
         <SectionTitle
           tag="Journey"
           title="A clearer timeline through the work"
-          text="The game energy stays in the visual language, but the story is presented in a more focused, professional way with milestone cards that are easier to read and scan."
+          text="The gaming experience stays in the visual language, while the career story reads like a focused professional timeline with clean milestones and scannable context."
         />
 
         <div className="runner-stage">
           <div className="run-launch-panel relative mx-auto min-h-[280px] w-full max-w-5xl">
-            <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">Career Snapshot</p>
+            <p className="text-[11px] uppercase text-cyan-300">Career Snapshot</p>
             <h3 className="run-panel-title">
               From AI foundations to product-focused execution
             </h3>
             <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
               The portfolio now highlights progression with calmer hierarchy: strong milestones, readable context, and
-              a more polished visual rhythm across the page.
+              a polished visual rhythm that keeps the experience memorable without overpowering the work.
             </p>
           </div>
 
@@ -226,9 +227,9 @@ export default function Home() {
                 transition={{ duration: 0.45, delay: index * 0.08 }}
                 className={`checkpoint ${index % 2 === 0 ? 'checkpoint-cyan' : 'checkpoint-orange'}`}
               >
-                <p className="text-[11px] uppercase tracking-[0.3em] text-slate-400">{step.year}</p>
+                <p className="text-[11px] uppercase text-slate-400">{step.year}</p>
                 <h3 className="checkpoint-title">{step.name}</h3>
-                <p className="mt-1 text-xs uppercase tracking-[0.28em] text-cyan-300">{step.tag}</p>
+                <p className="mt-1 text-xs uppercase text-cyan-300">{step.tag}</p>
                 <p className="mt-3 text-sm leading-7 text-slate-300">{step.summary}</p>
               </motion.article>
             ))}
@@ -240,7 +241,7 @@ export default function Home() {
         <SectionTitle
           tag="Project Levels"
           title="The missions you can open right now"
-          text="Your recent resume projects are framed as playable levels, with clearer energy, stronger hierarchy, and better visual pacing."
+          text="Recent projects are framed as playable levels, but the copy and hierarchy stay grounded for recruiters, clients, and technical reviewers."
         />
 
         <div className="projects-grid">
@@ -259,8 +260,8 @@ export default function Home() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-[11px] uppercase tracking-[0.3em] text-cyan-300">{project.type}</p>
-                  <h3 className="mt-2 font-display text-3xl uppercase tracking-[0.06em] text-white">{project.title}</h3>
+                  <p className="text-[11px] uppercase text-cyan-300">{project.type}</p>
+                  <h3 className="mt-2 font-display text-3xl uppercase text-white">{project.title}</h3>
                 </div>
                 <ArrowRight className="mt-2 h-5 w-5 text-orange-300" />
               </div>
@@ -283,7 +284,7 @@ export default function Home() {
         <SectionTitle
           tag="Powerups"
           title="The skills driving the run"
-          text="These are the systems behind the projects: interface speed, AI intelligence, backend reliability, and deployment stamina."
+          text="The systems behind the projects: interface speed, AI intelligence, backend reliability, and deployment discipline."
         />
 
         <div className="skills-grid">
@@ -295,7 +296,7 @@ export default function Home() {
                   <div className="skill-icon">
                     <Icon className="h-5 w-5 text-cyan-300" />
                   </div>
-                  <h3 className="text-2xl font-semibold tracking-[0.01em] text-white">{lane.title}</h3>
+                  <h3 className="text-2xl font-semibold text-white">{lane.title}</h3>
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -317,7 +318,7 @@ export default function Home() {
             <SectionTitle
               tag="Next Level"
               title="Let's build something that feels alive"
-              text="If you want an AI product, automation workflow, or frontend experience with real motion and personality, send the mission details here."
+              text="If you want an AI product, automation workflow, or frontend experience with motion and personality, send the project details here."
             />
 
             <div className="mt-8 space-y-3 text-sm text-slate-300">
@@ -331,7 +332,7 @@ export default function Home() {
               </p>
               <p className="social-link">
                 <Sparkles className="h-4 w-4" />
-                Best fit: AI SaaS, polished MVPs, automation tools
+                Best fit: AI SaaS, polished MVPs, and automation tools
               </p>
             </div>
           </div>
@@ -343,11 +344,11 @@ export default function Home() {
               name="message"
               rows={6}
               required
-              placeholder="Tell me about the mission..."
+              placeholder="Tell me about the project..."
               className="form-field"
             />
             <button type="submit" className="action-btn w-full justify-center">
-              Send Mission
+              Send Message
             </button>
           </form>
         </div>
