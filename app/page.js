@@ -289,12 +289,37 @@ export default function Home() {
               height={1024}
               className="journey-img"
             />
+            <svg className="journey-route" viewBox="0 0 1000 320" aria-hidden="true" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="journeyRouteGradient" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#72f6ff" />
+                  <stop offset="52%" stopColor="#a78bfa" />
+                  <stop offset="100%" stopColor="#ff974d" />
+                </linearGradient>
+              </defs>
+              <path
+                className="journey-route-glow"
+                d="M24 123 C76 123 83 168 126 168 C178 168 172 205 222 205 C272 205 276 172 330 172 C386 172 385 206 439 206 C493 206 497 168 544 168 C590 168 594 208 640 208 C692 208 694 165 744 165 C795 165 798 200 850 200 C908 200 925 161 976 129"
+              />
+              <path
+                className="journey-route-core"
+                d="M24 123 C76 123 83 168 126 168 C178 168 172 205 222 205 C272 205 276 172 330 172 C386 172 385 206 439 206 C493 206 497 168 544 168 C590 168 594 208 640 208 C692 208 694 165 744 165 C795 165 798 200 850 200 C908 200 925 161 976 129"
+              />
+            </svg>
             <div className="journey-caption">
               <span>AI Foundations</span>
               <span>Product Systems</span>
               <span>Launch Energy</span>
             </div>
           </motion.div>
+
+          <div className="journey-card-bridge" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
 
           <div className="checkpoint-row">
             {runTimeline.map((step, index) => (
