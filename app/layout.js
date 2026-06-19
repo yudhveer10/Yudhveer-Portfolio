@@ -1,29 +1,29 @@
-import { Orbitron, Rajdhani } from 'next/font/google';
+import { Space_Grotesk, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Analytics } from '@vercel/analytics/next';
 
-const orbitron = Orbitron({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-display',
+  variable: '--font-sans',
 });
 
-const rajdhani = Rajdhani({
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-body',
+  variable: '--font-mono',
 });
 
 export const metadata = {
-  title: 'Yudhveer Singh Panwar | Game UI Portfolio',
+  title: 'Yudhveer Singh Panwar | Full Stack AI Developer',
   description:
-    'Game-inspired portfolio for Yudhveer Singh Panwar, featuring full stack AI work, product-focused frontend systems, and recent projects from his resume.',
+    'Portfolio of Yudhveer Singh Panwar — a full stack AI developer building thoughtful, intelligent digital products.',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${orbitron.variable} ${rajdhani.variable}`}>
+      <body className={`${spaceGrotesk.variable} ${ibmPlexMono.variable}`}>
         <ThemeProvider>{children}</ThemeProvider>
         <Analytics />
       </body>
