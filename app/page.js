@@ -74,8 +74,14 @@ export default function Home() {
       </section>
 
       <section className="contact" id="contact">
-        <motion.div {...reveal} className="contact-copy"><span className="mono">// 04 · Contact</span><h2>Have an ambitious idea?<br />Let&apos;s make it <em>real.</em></h2><p>Tell me what you&apos;re trying to build. I&apos;ll bring clarity, technical range, and the energy to move it forward.</p><a className="button" href="mailto:yudhveerp10@gmail.com">Start a conversation <Mail /></a></motion.div>
-        <div className="contact-links"><a href="mailto:yudhveerp10@gmail.com"><Mail />yudhveerp10@gmail.com</a><span><MapPin />New Delhi, India</span><a href="https://github.com/yudhveer10" target="_blank" rel="noreferrer"><Github />github.com/yudhveer10</a><a href="https://www.linkedin.com/in/yudhveer10" target="_blank" rel="noreferrer"><Linkedin />linkedin.com/in/yudhveer10</a></div>
+        <motion.div {...reveal} className="contact-copy"><span className="mono">// 04 · Contact</span><h2>Have an ambitious idea?<br />Let&apos;s make it <em>real.</em></h2><p>Tell me what you&apos;re trying to build. I&apos;ll bring clarity, technical range, and the energy to move it forward.</p><div className="contact-links"><a href="mailto:yudhveerp10@gmail.com"><Mail />yudhveerp10@gmail.com</a><span><MapPin />New Delhi, India</span><a href="https://github.com/yudhveer10" target="_blank" rel="noreferrer"><Github />github.com/yudhveer10</a><a href="https://www.linkedin.com/in/yudhveer10" target="_blank" rel="noreferrer"><Linkedin />linkedin.com/in/yudhveer10</a></div></motion.div>
+        <motion.form {...reveal} action="https://formspree.io/f/xgvnlrrn" method="POST" className="contact-form">
+          <div className="form-heading"><span className="mono">Project brief</span><h3>Send me the details.</h3></div>
+          <label><span>Name</span><input type="text" name="name" autoComplete="name" placeholder="Your name" required /></label>
+          <label><span>Email</span><input type="email" name="email" autoComplete="email" placeholder="you@example.com" required /></label>
+          <label><span>Message</span><textarea name="message" rows={6} placeholder="What are you hoping to build?" required /></label>
+          <button type="submit" className="button">Send message <ArrowUpRight /></button>
+        </motion.form>
       </section>
 
       <footer><span>© {new Date().getFullYear()} Yudhveer Singh Panwar</span><span className="mono"><Terminal /> Built with intent. Shipped with care.</span></footer>
