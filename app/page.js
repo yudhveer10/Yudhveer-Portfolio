@@ -2,7 +2,20 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowDownToLine, ArrowUpRight, Box, BrainCircuit, Github, Linkedin, Mail, MapPin, Rocket, Terminal } from 'lucide-react';
+import {
+  ArrowDownToLine,
+  ArrowUpRight,
+  Box,
+  BrainCircuit,
+  BriefcaseBusiness,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  Rocket,
+  Sparkles,
+  Terminal,
+} from 'lucide-react';
 
 const projects = [
   { number: '01', title: 'Flo.AI', type: 'Agentic workflow engine', description: 'Multi-step AI automation built for reliable decisions, lower latency, and real product work.', stack: ['Next.js', 'Python', 'Gemini 2.5', 'PostgreSQL'], result: '98% workflow success', href: 'https://github.com/yudhveer10' },
@@ -18,11 +31,13 @@ const capabilities = [
 ];
 
 const journey = [
-  ['2026 — Now', 'Full Stack AI Developer', 'Building product experiences and intelligent automation at TechAivv.'],
-  ['2025', 'Agentic Product Builder', 'Shipped Flo.AI and workflow automation systems around generative AI.'],
-  ['2024', 'Applied ML Engineer', 'Built and deployed computer-vision and predictive-health products.'],
-  ['2022 — 2026', 'B.Tech · AI & Data Science', 'Strengthened the foundations: algorithms, systems, data, and product thinking.'],
+  ['June 2026 — Present', 'AI Engineer Associate · TechAivv', 'Full-time role focused on applied AI engineering, production thinking, prompt design, model evaluation, automation, and reliable user-facing AI systems.'],
+  ['Nov 2025 — June 2026', 'Software Developer Intern · TechAivv', 'Grew through hands-on software delivery: cleaner React patterns, API design, debugging discipline, Git workflows, communication, and shipping with ownership.'],
+  ['2024 — 2025', 'Applied AI & Full-Stack Learning', 'Built deeper foundations in machine learning, backend systems, databases, frontend craft, deployment, and translating technical ideas into usable software.'],
+  ['2022 — 2026', 'B.Tech · AI & Data Science', 'Strengthened the fundamentals: algorithms, data structures, statistics, data engineering, model thinking, and problem decomposition.'],
 ];
+
+const growthSkills = ['Applied AI engineering', 'Prompt design', 'Model evaluation', 'React architecture', 'API design', 'Production debugging', 'Git collaboration', 'Clear technical communication'];
 
 const reveal = { initial: { opacity: 0, y: 28 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.16 }, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } };
 
@@ -40,17 +55,18 @@ export default function Home() {
       </header>
 
       <section className="hero" id="home">
-        <motion.div className="hero-copy" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8 }}>
+        <motion.div className="hero-copy" initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8 }}>
           <h1>I build AI products that feel <em>human.</em></h1>
-          <p>Full-stack AI developer crafting intelligent products end-to-end—from a rough idea to software people trust, understand, and enjoy using.</p>
+          <p>AI Engineer Associate at TechAivv, crafting intelligent products end-to-end—from a rough idea to software people trust, understand, and enjoy using.</p>
           <div className="hero-actions"><a className="button" href="#work">View selected work <ArrowUpRight /></a><a className="button button-ghost" href="/Yudhveer_resume2.pdf" target="_blank" rel="noreferrer">Download résumé <ArrowDownToLine /></a></div>
           <div className="availability mono"><span className="live-dot" />Based in New Delhi <i /> Available for meaningful AI product work</div>
+          <div className="role-pill"><BriefcaseBusiness /><span>Current role</span><strong>AI Engineer Associate · TechAivv</strong></div>
         </motion.div>
 
-        <motion.div className="portrait-wrap" initial={{ opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .9, delay: .12 }}>
+        <motion.div className="portrait-wrap" initial={false} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .9, delay: .12 }}>
           <div className="portrait-grid" /><span className="corner corner-a" /><span className="corner corner-b" />
           <Image src="/yudhveer.jpg" alt="Yudhveer Singh Panwar" width={900} height={1200} priority className="portrait" />
-          <div className="portrait-meta mono"><span>FULL STACK / AI</span><span>28.6139° N<br />77.2090° E</span></div>
+          <div className="portrait-meta mono"><span>AI ENGINEER / FULL STACK</span><span>28.6139° N<br />77.2090° E</span></div>
         </motion.div>
       </section>
 
@@ -70,6 +86,11 @@ export default function Home() {
 
       <section className="section journey-section" id="journey">
         <SectionHeader index="03" title="A builder’s journey" copy="The through-line is simple: learn the system, make it useful, then ship it well." />
+        <motion.div {...reveal} className="current-role-card">
+          <div><span className="mono"><Sparkles /> Current chapter</span><h3>From internship to full-time AI Engineer Associate at TechAivv.</h3></div>
+          <p>After completing my Software Developer Internship in June 2026, I stepped into a full-time AI engineering role where I’m sharpening production AI, system design, frontend quality, backend reliability, and collaborative delivery.</p>
+          <div className="growth-tags">{growthSkills.map(skill => <span key={skill}>{skill}</span>)}</div>
+        </motion.div>
         <div className="timeline">{journey.map(([date, role, description], i) => <motion.div key={role} {...reveal} transition={{ ...reveal.transition, delay: i * .05 }} className="timeline-row"><span className="timeline-dot" /><time className="mono">{date}</time><h3>{role}</h3><p>{description}</p></motion.div>)}</div>
       </section>
 
