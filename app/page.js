@@ -5,11 +5,15 @@ import { motion } from 'framer-motion';
 import {
   ArrowDownToLine,
   ArrowUpRight,
+  Award,
   Box,
   BrainCircuit,
   BriefcaseBusiness,
+  Code2,
   Github,
+  GraduationCap,
   Linkedin,
+  Lock,
   Mail,
   MapPin,
   Rocket,
@@ -18,10 +22,9 @@ import {
 } from 'lucide-react';
 
 const projects = [
-  { number: '01', title: 'Flo.AI', type: 'Agentic workflow engine', description: 'Multi-step AI automation built for reliable decisions, lower latency, and real product work.', stack: ['Next.js', 'Python', 'Gemini 2.5', 'PostgreSQL'], result: '98% workflow success', href: 'https://github.com/yudhveer10' },
-  { number: '02', title: 'The Crop Doctor', type: 'Computer vision · AgriTech', description: 'A fast crop-disease diagnosis experience trained on 5,000+ annotated images.', stack: ['React', 'TensorFlow', 'CNN', 'FastAPI'], result: '95% validation accuracy', href: 'https://github.com/yudhveer10/tomato-plant-disease-detection' },
-  { number: '03', title: 'GlucoPredict', type: 'Predictive health platform', description: 'Diabetes-risk prediction made more robust with synthetic-data-assisted modelling.', stack: ['Flask', 'Python', 'GAN', 'scikit-learn'], result: 'Explainable predictions', href: 'https://github.com/yudhveer10/Glucopredict' },
-  { number: '04', title: 'Biometric Authentication', type: 'Identity · Security', description: 'Face recognition, liveness detection, and identity verification in one secure flow.', stack: ['WebRTC', 'OpenCV', 'Python', 'FastAPI'], result: 'Privacy-first verification', href: 'https://github.com/aarinbadola/Authentication-proj' },
+  { number: '01', title: 'Brahmastra', type: 'FinTech · Options intelligence', description: 'A private options-intelligence terminal with responsive NIFTY 50 and BANK NIFTY dashboards, simulating real-time market ticks with candlestick, VWAP, option-chain, IV, open-interest, delta, and defined-risk spread analysis.', stack: ['React', 'TypeScript', 'Vite', 'Node.js'], result: 'Modular broker-provider layers', href: null },
+  { number: '02', title: 'SSB Sarthi', type: 'EdTech · Defence exam prep', description: 'A full-stack platform helping Indian defence aspirants prepare for the SSB, with personalised prep plans, OIR timed practice tests, PPDT story-writing, OLQ reflection journals, and a readiness dashboard.', stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase'], result: 'Row-level secured user data', href: 'https://github.com/yudhveer10/SSB-Sarthi' },
+  { number: '03', title: 'The Crop Doctor', type: 'Computer vision · AgriTech', description: 'A deep-learning classifier trained on 5,000+ annotated images across 10 disease categories, wired into a web interface that returns a diagnosis in under two seconds.', stack: ['Python', 'TensorFlow', 'CNN', 'Deep Learning'], result: '95% validation accuracy', href: 'https://github.com/yudhveer10/tomato-plant-disease-detection' },
 ];
 
 const capabilities = [
@@ -30,11 +33,24 @@ const capabilities = [
   { icon: Rocket, title: 'Ship & Scale', text: 'I carry the work from prototype to production with a bias for momentum and quality.', items: ['Cloud & containers', 'CI/CD & observability', 'Security-minded delivery'] },
 ];
 
+const skills = [
+  { label: 'Languages', items: ['JavaScript', 'TypeScript', 'Python', 'SQL', 'C++', 'C'] },
+  { label: 'Frameworks', items: ['Next.js', 'React.js', 'Express.js', 'Tailwind CSS'] },
+  { label: 'Databases', items: ['SQL', 'NoSQL', 'MongoDB', 'Redis', 'Firebase'] },
+  { label: 'Tools & Infrastructure', items: ['AWS', 'Docker', 'Kubernetes', 'TensorFlow/Keras', 'CI/CD'] },
+];
+
 const journey = [
-  ['June 2026 — Present', 'AI Engineer Associate · TechAivv', 'Full-time role focused on applied AI engineering, production thinking, prompt design, model evaluation, automation, and reliable user-facing AI systems.'],
-  ['Nov 2025 — June 2026', 'Software Developer Intern · TechAivv', 'Grew through hands-on software delivery: cleaner React patterns, API design, debugging discipline, Git workflows, communication, and shipping with ownership.'],
-  ['2024 — 2025', 'Applied AI & Full-Stack Learning', 'Built deeper foundations in machine learning, backend systems, databases, frontend craft, deployment, and translating technical ideas into usable software.'],
+  ['June 2026 — Present', 'AI Engineer Associate · TechAivv Technologies', 'Building a scalable full-stack AI SaaS platform—integrating generative models to automate 80% of manual user workflows, and engineering backends for real-time inference under 200ms.'],
+  ['Nov 2025 — June 2026', 'Software Developer Intern · TechAivv Technologies', 'Designed responsive interfaces in Next.js and React, reaching a 95+ Lighthouse score and cutting initial page-load latency by 45% through efficient component modularity.'],
+  ['July 2025 — Aug 2025', 'Python Developer Intern · Paisalo Digital Limited', 'Built internal workflow automation with Python, Pandas, NumPy, and OCR—automating 80% of repetitive tasks, halving manual effort, and improving data-flow reliability by 35%.'],
   ['2022 — 2026', 'B.Tech · AI & Data Science', 'Strengthened the fundamentals: algorithms, data structures, statistics, data engineering, model thinking, and problem decomposition.'],
+];
+
+const achievements = [
+  { icon: GraduationCap, title: 'Vivekananda Institute of Professional Studies', meta: 'GGSIPU · New Delhi · 2022 — 2026', text: 'B.Tech in AI & Data Science, graduated with an 8.57 CGPA.' },
+  { icon: Award, title: "Core Team '25 · TEDxVIPS", meta: 'External relations & partnerships', text: 'Managed vendor partnerships and secured the key sponsorships behind the event’s operational success.' },
+  { icon: Code2, title: '300+ problems solved on LeetCode', meta: '100 Days Badge · 2025', text: 'Arrays, trees, and dynamic programming—earned through consistent daily problem-solving.' },
 ];
 
 const growthSkills = ['Applied AI engineering', 'Prompt design', 'Model evaluation', 'React architecture', 'API design', 'Production debugging', 'Git collaboration', 'Clear technical communication'];
@@ -45,12 +61,28 @@ function SectionHeader({ index, title, copy }) {
   return <div className="section-header"><div><span className="mono">// {index}</span><h2>{title}</h2></div>{copy ? <p>{copy}</p> : null}</div>;
 }
 
+function ProjectBody({ project }) {
+  return (
+    <>
+      <span className="project-number mono">{project.number}</span>
+      <div className="project-main">
+        <span className="mono">{project.type}</span>
+        <h3>{project.title}</h3>
+        <p>{project.description}</p>
+        <div className="stack mono">{project.stack.map(x => <span key={x}>{x}</span>)}</div>
+      </div>
+      <div className="project-result"><span className="mono">Outcome</span><strong>{project.result}</strong></div>
+      <span className="project-arrow">{project.href ? <ArrowUpRight /> : <Lock />}</span>
+    </>
+  );
+}
+
 export default function Home() {
   return (
     <main>
       <header className="site-header">
         <a className="brand" href="#home" aria-label="Yudhveer home"><span>YS</span><strong>Yudhveer Singh Panwar</strong></a>
-        <nav aria-label="Primary navigation"><a href="#work">Work</a><a href="#capabilities">Capabilities</a><a href="#journey">Journey</a><a href="#contact">Contact</a></nav>
+        <nav aria-label="Primary navigation"><a href="#work">Work</a><a href="#capabilities">Capabilities</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#contact">Contact</a></nav>
         <a className="button button-small" href="#contact">Let&apos;s work together <ArrowUpRight /></a>
       </header>
 
@@ -58,24 +90,25 @@ export default function Home() {
         <motion.div className="hero-copy" initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8 }}>
           <h1>I build AI products that feel <em>human.</em></h1>
           <p>AI Engineer Associate at TechAivv, crafting intelligent products end-to-end—from a rough idea to software people trust, understand, and enjoy using.</p>
-          <div className="hero-actions"><a className="button" href="#work">View selected work <ArrowUpRight /></a><a className="button button-ghost" href="/Yudhveer_resume2.pdf" target="_blank" rel="noreferrer">Download résumé <ArrowDownToLine /></a></div>
+          <div className="hero-actions"><a className="button" href="#work">View selected work <ArrowUpRight /></a><a className="button button-ghost" href="/Yudhveer-Singh-Panwar-Resume.pdf" target="_blank" rel="noreferrer">Download résumé <ArrowDownToLine /></a></div>
           <div className="availability mono"><span className="live-dot" />Based in New Delhi <i /> Available for meaningful AI product work</div>
           <div className="role-pill"><BriefcaseBusiness /><span>Current role</span><strong>AI Engineer Associate · TechAivv</strong></div>
         </motion.div>
 
         <motion.div className="portrait-wrap" initial={false} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .9, delay: .12 }}>
           <div className="portrait-grid" /><span className="corner corner-a" /><span className="corner corner-b" />
-          <Image src="/yudhveer.jpg" alt="Yudhveer Singh Panwar" width={900} height={1200} priority className="portrait" />
+          <Image src="/yudhveer.webp" alt="Yudhveer Singh Panwar" width={1500} height={2250} priority sizes="(max-width: 900px) 92vw, 740px" className="portrait" />
           <div className="portrait-meta mono"><span>AI ENGINEER / FULL STACK</span><span>28.6139° N<br />77.2090° E</span></div>
         </motion.div>
       </section>
 
       <section className="section" id="work">
-        <SectionHeader index="01" title="Selected work" copy="Four products where engineering depth meets useful, thoughtful experience." />
+        <SectionHeader index="01" title="Selected work" copy="Three products where engineering depth meets useful, thoughtful experience." />
         <div className="project-list">
-          {projects.map((project, i) => <motion.a key={project.title} {...reveal} transition={{ ...reveal.transition, delay: i * .05 }} className="project-row" href={project.href} target="_blank" rel="noreferrer">
-            <span className="project-number mono">{project.number}</span><div className="project-main"><span className="mono">{project.type}</span><h3>{project.title}</h3><p>{project.description}</p><div className="stack mono">{project.stack.map(x => <span key={x}>{x}</span>)}</div></div><div className="project-result"><span className="mono">Outcome</span><strong>{project.result}</strong></div><span className="project-arrow"><ArrowUpRight /></span>
-          </motion.a>)}
+          {projects.map((project, i) => project.href
+            ? <motion.a key={project.title} {...reveal} transition={{ ...reveal.transition, delay: i * .05 }} className="project-row" href={project.href} target="_blank" rel="noreferrer"><ProjectBody project={project} /></motion.a>
+            : <motion.div key={project.title} {...reveal} transition={{ ...reveal.transition, delay: i * .05 }} className="project-row project-row-private" title="Private repository"><ProjectBody project={project} /></motion.div>
+          )}
         </div>
       </section>
 
@@ -84,18 +117,24 @@ export default function Home() {
         <div className="capability-grid">{capabilities.map((cap, i) => { const Icon = cap.icon; return <motion.article key={cap.title} {...reveal} transition={{ ...reveal.transition, delay: i * .08 }} className="capability"><Icon /><span className="mono">0{i + 1}</span><h3>{cap.title}</h3><p>{cap.text}</p><ul>{cap.items.map(item => <li key={item}>{item}</li>)}</ul></motion.article>; })}</div>
       </section>
 
+      <section className="section" id="skills">
+        <SectionHeader index="03" title="Technical toolkit" copy="The stack I reach for—chosen for reliability in production, not novelty." />
+        <div className="skill-grid">{skills.map((group, i) => <motion.div key={group.label} {...reveal} transition={{ ...reveal.transition, delay: i * .06 }} className="skill-group"><span className="mono">{group.label}</span><ul>{group.items.map(item => <li key={item}>{item}</li>)}</ul></motion.div>)}</div>
+      </section>
+
       <section className="section journey-section" id="journey">
-        <SectionHeader index="03" title="A builder’s journey" copy="The through-line is simple: learn the system, make it useful, then ship it well." />
+        <SectionHeader index="04" title="A builder’s journey" copy="The through-line is simple: learn the system, make it useful, then ship it well." />
         <motion.div {...reveal} className="current-role-card">
           <div><span className="mono"><Sparkles /> Current chapter</span><h3>From internship to full-time AI Engineer Associate at TechAivv.</h3></div>
           <p>After completing my Software Developer Internship in June 2026, I stepped into a full-time AI engineering role where I’m sharpening production AI, system design, frontend quality, backend reliability, and collaborative delivery.</p>
           <div className="growth-tags">{growthSkills.map(skill => <span key={skill}>{skill}</span>)}</div>
         </motion.div>
         <div className="timeline">{journey.map(([date, role, description], i) => <motion.div key={role} {...reveal} transition={{ ...reveal.transition, delay: i * .05 }} className="timeline-row"><span className="timeline-dot" /><time className="mono">{date}</time><h3>{role}</h3><p>{description}</p></motion.div>)}</div>
+        <div className="credential-grid">{achievements.map((item, i) => { const Icon = item.icon; return <motion.article key={item.title} {...reveal} transition={{ ...reveal.transition, delay: i * .06 }} className="credential"><Icon /><span className="mono">{item.meta}</span><h3>{item.title}</h3><p>{item.text}</p></motion.article>; })}</div>
       </section>
 
       <section className="contact" id="contact">
-        <motion.div {...reveal} className="contact-copy"><span className="mono">// 04 · Contact</span><h2>Have an ambitious idea?<br />Let&apos;s make it <em>real.</em></h2><p>Tell me what you&apos;re trying to build. I&apos;ll bring clarity, technical range, and the energy to move it forward.</p><div className="contact-links"><a href="mailto:yudhveerp10@gmail.com"><Mail />yudhveerp10@gmail.com</a><span><MapPin />New Delhi, India</span><a href="https://github.com/yudhveer10" target="_blank" rel="noreferrer"><Github />github.com/yudhveer10</a><a href="https://www.linkedin.com/in/yudhveer10" target="_blank" rel="noreferrer"><Linkedin />linkedin.com/in/yudhveer10</a></div></motion.div>
+        <motion.div {...reveal} className="contact-copy"><span className="mono">// 05 · Contact</span><h2>Have an ambitious idea?<br />Let&apos;s make it <em>real.</em></h2><p>Tell me what you&apos;re trying to build. I&apos;ll bring clarity, technical range, and the energy to move it forward.</p><div className="contact-links"><a href="mailto:yudhveerp10@gmail.com"><Mail />yudhveerp10@gmail.com</a><span><MapPin />New Delhi, India</span><a href="https://github.com/yudhveer10" target="_blank" rel="noreferrer"><Github />github.com/yudhveer10</a><a href="https://www.linkedin.com/in/yudhveer10" target="_blank" rel="noreferrer"><Linkedin />linkedin.com/in/yudhveer10</a></div></motion.div>
         <motion.form {...reveal} action="https://formspree.io/f/xgvnlrrn" method="POST" className="contact-form">
           <div className="form-heading"><span className="mono">Project brief</span><h3>Send me the details.</h3></div>
           <label><span>Name</span><input type="text" name="name" autoComplete="name" placeholder="Your name" required /></label>
