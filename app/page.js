@@ -22,9 +22,10 @@ import {
 } from 'lucide-react';
 
 const projects = [
-  { number: '01', title: 'Brahmastra', type: 'FinTech · Options intelligence', description: 'A private options-intelligence terminal with responsive NIFTY 50 and BANK NIFTY dashboards, simulating real-time market ticks with candlestick, VWAP, option-chain, IV, open-interest, delta, and defined-risk spread analysis.', stack: ['React', 'TypeScript', 'Vite', 'Node.js'], result: 'Modular broker-provider layers', href: null },
-  { number: '02', title: 'SSB Sarthi', type: 'EdTech · Defence exam prep', description: 'A full-stack platform helping Indian defence aspirants prepare for the SSB, with personalised prep plans, OIR timed practice tests, PPDT story-writing, OLQ reflection journals, and a readiness dashboard.', stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase'], result: 'Row-level secured user data', href: 'https://github.com/yudhveer10/SSB-Sarthi' },
-  { number: '03', title: 'The Crop Doctor', type: 'Computer vision · AgriTech', description: 'A deep-learning classifier trained on 5,000+ annotated images across 10 disease categories, wired into a web interface that returns a diagnosis in under two seconds.', stack: ['Python', 'TensorFlow', 'CNN', 'Deep Learning'], result: '95% validation accuracy', href: 'https://github.com/yudhveer10/tomato-plant-disease-detection' },
+  { number: '01', title: 'Flo.AI', type: 'Agentic workflow engine', description: 'Multi-step AI automation built for reliable decisions, lower latency, and real product work.', stack: ['Next.js', 'Python', 'Gemini 2.5', 'PostgreSQL'], result: '98% workflow success', href: 'https://github.com/yudhveer10' },
+  { number: '02', title: 'Brahmastra', type: 'FinTech · Options intelligence', description: 'A private options-intelligence terminal with responsive NIFTY 50 and BANK NIFTY dashboards, simulating real-time market ticks with candlestick, VWAP, option-chain, IV, open-interest, delta, and defined-risk spread analysis.', stack: ['React', 'TypeScript', 'Vite', 'Node.js'], result: 'Modular broker-provider layers', href: null },
+  { number: '03', title: 'SSB Sarthi', type: 'EdTech · Defence exam prep', description: 'A full-stack platform helping Indian defence aspirants prepare for the SSB, with personalised prep plans, OIR timed practice tests, PPDT story-writing, OLQ reflection journals, and a readiness dashboard.', stack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase'], result: 'Row-level secured user data', href: 'https://github.com/yudhveer10/SSB-Sarthi' },
+  { number: '04', title: 'The Crop Doctor', type: 'Computer vision · AgriTech', description: 'A deep-learning classifier trained on 5,000+ annotated images across 10 disease categories, wired into a web interface that returns a diagnosis in under two seconds.', stack: ['Python', 'TensorFlow', 'CNN', 'Deep Learning'], result: '95% validation accuracy', href: 'https://github.com/yudhveer10/tomato-plant-disease-detection' },
 ];
 
 const capabilities = [
@@ -103,7 +104,7 @@ export default function Home() {
       </section>
 
       <section className="section" id="work">
-        <SectionHeader index="01" title="Selected work" copy="Three products where engineering depth meets useful, thoughtful experience." />
+        <SectionHeader index="01" title="Selected work" copy="Four products where engineering depth meets useful, thoughtful experience." />
         <div className="project-list">
           {projects.map((project, i) => project.href
             ? <motion.a key={project.title} {...reveal} transition={{ ...reveal.transition, delay: i * .05 }} className="project-row" href={project.href} target="_blank" rel="noreferrer"><ProjectBody project={project} /></motion.a>
