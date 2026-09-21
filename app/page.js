@@ -59,7 +59,7 @@ const growthSkills = ['Applied AI engineering', 'Prompt design', 'Model evaluati
 const reveal = { initial: { opacity: 0, y: 28 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.16 }, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } };
 
 function SectionHeader({ index, title, copy }) {
-  return <div className="section-header"><div><span className="mono">// {index}</span><h2>{title}</h2></div>{copy ? <p>{copy}</p> : null}</div>;
+  return <div className="section-header"><div><span className="mono">{index}</span><h2>{title}</h2></div>{copy ? <p>{copy}</p> : null}</div>;
 }
 
 function ProjectBody({ project }) {
@@ -97,14 +97,13 @@ export default function Home() {
         </motion.div>
 
         <motion.div className="portrait-wrap" initial={false} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .9, delay: .12 }}>
-          <div className="portrait-grid" /><span className="corner corner-a" /><span className="corner corner-b" />
-          <Image src="/yudhveer.webp" alt="Yudhveer Singh Panwar" width={1500} height={2250} priority sizes="(max-width: 900px) 92vw, 740px" className="portrait" />
-          <div className="portrait-meta mono"><span>AI ENGINEER / FULL STACK</span><span>28.6139° N<br />77.2090° E</span></div>
+          <Image src="/yudhveer.webp" alt="Yudhveer Singh Panwar" width={1500} height={2250} priority sizes="(max-width: 960px) 92vw, 520px" className="portrait" />
+          <div className="portrait-meta mono"><span>AI Engineer · Full Stack</span><span>New Delhi, India</span></div>
         </motion.div>
       </section>
 
       <section className="section" id="work">
-        <SectionHeader index="01" title="Selected work" copy="Four products where engineering depth meets useful, thoughtful experience." />
+        <SectionHeader index="Work" title="Selected work" copy="Four products where engineering depth meets useful, thoughtful experience." />
         <div className="project-list">
           {projects.map((project, i) => project.href
             ? <motion.a key={project.title} {...reveal} transition={{ ...reveal.transition, delay: i * .05 }} className="project-row" href={project.href} target="_blank" rel="noreferrer"><ProjectBody project={project} /></motion.a>
@@ -114,17 +113,17 @@ export default function Home() {
       </section>
 
       <section className="section" id="capabilities">
-        <SectionHeader index="02" title="What I bring" copy="One builder across product, intelligence, and production—not a chain of handoffs." />
+        <SectionHeader index="Capabilities" title="What I bring" copy="One builder across product, intelligence, and production—not a chain of handoffs." />
         <div className="capability-grid">{capabilities.map((cap, i) => { const Icon = cap.icon; return <motion.article key={cap.title} {...reveal} transition={{ ...reveal.transition, delay: i * .08 }} className="capability"><Icon /><span className="mono">0{i + 1}</span><h3>{cap.title}</h3><p>{cap.text}</p><ul>{cap.items.map(item => <li key={item}>{item}</li>)}</ul></motion.article>; })}</div>
       </section>
 
       <section className="section" id="skills">
-        <SectionHeader index="03" title="Technical toolkit" copy="The stack I reach for—chosen for reliability in production, not novelty." />
+        <SectionHeader index="Skills" title="Technical toolkit" copy="The stack I reach for—chosen for reliability in production, not novelty." />
         <div className="skill-grid">{skills.map((group, i) => <motion.div key={group.label} {...reveal} transition={{ ...reveal.transition, delay: i * .06 }} className="skill-group"><span className="mono">{group.label}</span><ul>{group.items.map(item => <li key={item}>{item}</li>)}</ul></motion.div>)}</div>
       </section>
 
       <section className="section journey-section" id="journey">
-        <SectionHeader index="04" title="A builder’s journey" copy="The through-line is simple: learn the system, make it useful, then ship it well." />
+        <SectionHeader index="Journey" title="A builder’s journey" copy="The through-line is simple: learn the system, make it useful, then ship it well." />
         <motion.div {...reveal} className="current-role-card">
           <div><span className="mono"><Sparkles /> Current chapter</span><h3>From internship to full-time AI Engineer Associate at TechAivv.</h3></div>
           <p>After completing my Software Developer Internship in June 2026, I stepped into a full-time AI engineering role where I’m sharpening production AI, system design, frontend quality, backend reliability, and collaborative delivery.</p>
@@ -135,7 +134,7 @@ export default function Home() {
       </section>
 
       <section className="contact" id="contact">
-        <motion.div {...reveal} className="contact-copy"><span className="mono">// 05 · Contact</span><h2>Have an ambitious idea?<br />Let&apos;s make it <em>real.</em></h2><p>Tell me what you&apos;re trying to build. I&apos;ll bring clarity, technical range, and the energy to move it forward.</p><div className="contact-links"><a href="mailto:yudhveerp10@gmail.com"><Mail />yudhveerp10@gmail.com</a><span><MapPin />New Delhi, India</span><a href="https://github.com/yudhveer10" target="_blank" rel="noreferrer"><Github />github.com/yudhveer10</a><a href="https://www.linkedin.com/in/yudhveer10" target="_blank" rel="noreferrer"><Linkedin />linkedin.com/in/yudhveer10</a></div></motion.div>
+        <motion.div {...reveal} className="contact-copy"><span className="mono">Contact</span><h2>Have an ambitious idea?<br />Let&apos;s make it <em>real.</em></h2><p>Tell me what you&apos;re trying to build. I&apos;ll bring clarity, technical range, and the energy to move it forward.</p><div className="contact-links"><a href="mailto:yudhveerp10@gmail.com"><Mail />yudhveerp10@gmail.com</a><span><MapPin />New Delhi, India</span><a href="https://github.com/yudhveer10" target="_blank" rel="noreferrer"><Github />github.com/yudhveer10</a><a href="https://www.linkedin.com/in/yudhveer10" target="_blank" rel="noreferrer"><Linkedin />linkedin.com/in/yudhveer10</a></div></motion.div>
         <motion.form {...reveal} action="https://formspree.io/f/xgvnlrrn" method="POST" className="contact-form">
           <div className="form-heading"><span className="mono">Project brief</span><h3>Send me the details.</h3></div>
           <label><span>Name</span><input type="text" name="name" autoComplete="name" placeholder="Your name" required /></label>

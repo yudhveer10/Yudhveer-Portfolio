@@ -1,20 +1,21 @@
-import { Space_Grotesk, IBM_Plex_Mono } from 'next/font/google';
+import { Inter, Instrument_Serif } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Analytics } from '@vercel/analytics/next';
 import { siteUrl, siteDescription as description } from './site-config';
 
-const spaceGrotesk = Space_Grotesk({
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
+const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: '400',
+  style: 'italic',
   display: 'swap',
-  variable: '--font-mono',
+  variable: '--font-serif',
 });
 
 export const metadata = {
@@ -57,7 +58,10 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: '#050b0f',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fafaf9' },
+    { media: '(prefers-color-scheme: dark)', color: '#0c0c0e' },
+  ],
 };
 
 const personSchema = {
@@ -94,7 +98,7 @@ const personSchema = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${spaceGrotesk.variable} ${ibmPlexMono.variable}`}>
+      <body className={`${inter.variable} ${instrumentSerif.variable}`}>
         <ThemeProvider>{children}</ThemeProvider>
         <script
           type="application/ld+json"

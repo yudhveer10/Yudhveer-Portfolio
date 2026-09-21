@@ -14,10 +14,7 @@ export default function OpengraphImage() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          background: '#050b0f',
-          backgroundImage:
-            'linear-gradient(180deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
+          background: '#fafaf9',
           padding: 68,
           fontFamily: 'sans-serif',
         }}
@@ -30,8 +27,9 @@ export default function OpengraphImage() {
               justifyContent: 'center',
               width: 54,
               height: 54,
-              background: '#baff00',
-              color: '#050b0f',
+              background: '#111113',
+              color: '#fafaf9',
+              borderRadius: 14,
               fontSize: 26,
               fontWeight: 900,
             }}
@@ -40,10 +38,9 @@ export default function OpengraphImage() {
           </div>
           <div
             style={{
-              color: '#929b9e',
-              fontSize: 21,
-              letterSpacing: 3,
-              textTransform: 'uppercase',
+              color: '#111113',
+              fontSize: 26,
+              fontWeight: 600,
             }}
           >
             Yudhveer Singh Panwar
@@ -54,7 +51,7 @@ export default function OpengraphImage() {
           <div
             style={{
               display: 'flex',
-              color: '#f2eee4',
+              color: '#111113',
               fontSize: 82,
               fontWeight: 700,
               letterSpacing: -3,
@@ -64,8 +61,8 @@ export default function OpengraphImage() {
             I build AI products
           </div>
           <div style={{ display: 'flex', gap: 22, fontSize: 82, fontWeight: 700, letterSpacing: -3, lineHeight: 1.05 }}>
-            <span style={{ color: '#f2eee4' }}>that feel</span>
-            <span style={{ color: '#baff00' }}>human.</span>
+            <span style={{ color: '#111113' }}>that feel</span>
+            <span style={{ color: '#3f5bd9', fontStyle: 'italic' }}>human.</span>
           </div>
         </div>
 
@@ -75,14 +72,14 @@ export default function OpengraphImage() {
             alignItems: 'center',
             justifyContent: 'space-between',
             paddingTop: 30,
-            borderTop: '1px solid #263238',
-            color: '#929b9e',
+            borderTop: '1px solid #e7e6e3',
+            color: '#52525b',
             fontSize: 22,
-            letterSpacing: 1.5,
+            
           }}
         >
-          <div style={{ display: 'flex' }}>AI ENGINEER ASSOCIATE · TECHAIVV</div>
-          <div style={{ display: 'flex', color: '#baff00' }}>NEW DELHI, INDIA</div>
+          <div style={{ display: 'flex' }}>AI Engineer Associate · TechAivv</div>
+          <div style={{ display: 'flex', color: '#8a8a93' }}>New Delhi, India</div>
         </div>
       </div>
     ),
