@@ -70,7 +70,7 @@ const personSchema = {
   name: 'Yudhveer Singh Panwar',
   url: siteUrl,
   email: 'mailto:yudhveerp10@gmail.com',
-  jobTitle: 'AI Engineer Associate',
+  jobTitle: 'AI Engineer',
   worksFor: { '@type': 'Organization', name: 'TechAivv Technologies' },
   address: {
     '@type': 'PostalAddress',

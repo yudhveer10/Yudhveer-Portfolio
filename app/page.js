@@ -42,7 +42,7 @@ const skills = [
 ];
 
 const journey = [
-  ['June 2026 — Present', 'AI Engineer Associate · TechAivv Technologies', 'Building a scalable full-stack AI SaaS platform—integrating generative models to automate 80% of manual user workflows, and engineering backends for real-time inference under 200ms.'],
+  ['June 2026 — Present', 'AI Engineer · TechAivv Technologies', 'Building a scalable full-stack AI SaaS platform—integrating generative models to automate 80% of manual user workflows, and engineering backends for real-time inference under 200ms.'],
   ['Nov 2025 — June 2026', 'Software Developer Intern · TechAivv Technologies', 'Designed responsive interfaces in Next.js and React, reaching a 95+ Lighthouse score and cutting initial page-load latency by 45% through efficient component modularity.'],
   ['July 2025 — Aug 2025', 'Python Developer Intern · Paisalo Digital Limited', 'Built internal workflow automation with Python, Pandas, NumPy, and OCR—automating 80% of repetitive tasks, halving manual effort, and improving data-flow reliability by 35%.'],
   ['2022 — 2026', 'B.Tech · AI & Data Science', 'Strengthened the fundamentals: algorithms, data structures, statistics, data engineering, model thinking, and problem decomposition.'],
@@ -90,10 +90,10 @@ export default function Home() {
       <section className="hero" id="home">
         <motion.div className="hero-copy" initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8 }}>
           <h1>I build AI products that feel <em>human.</em></h1>
-          <p>AI Engineer Associate at TechAivv, crafting intelligent products end-to-end—from a rough idea to software people trust, understand, and enjoy using.</p>
+          <p>AI Engineer at TechAivv, crafting intelligent products end-to-end—from a rough idea to software people trust, understand, and enjoy using.</p>
           <div className="hero-actions"><a className="button" href="#work">View selected work <ArrowUpRight /></a><a className="button button-ghost" href="/Yudhveer-Singh-Panwar-Resume.pdf" target="_blank" rel="noreferrer">Download résumé <ArrowDownToLine /></a></div>
           <div className="availability mono"><span className="live-dot" />Based in New Delhi <i /> Available for meaningful AI product work</div>
-          <div className="role-pill"><BriefcaseBusiness /><span>Current role</span><strong>AI Engineer Associate · TechAivv</strong></div>
+          <div className="role-pill"><BriefcaseBusiness /><span>Current role</span><strong>AI Engineer · TechAivv</strong></div>
         </motion.div>
 
         <motion.div className="portrait-wrap" initial={false} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .9, delay: .12 }}>
@@ -125,7 +125,7 @@ export default function Home() {
       <section className="section journey-section" id="journey">
         <SectionHeader index="Journey" title="A builder’s journey" copy="The through-line is simple: learn the system, make it useful, then ship it well." />
         <motion.div {...reveal} className="current-role-card">
-          <div><span className="mono"><Sparkles /> Current chapter</span><h3>From internship to full-time AI Engineer Associate at TechAivv.</h3></div>
+          <div><span className="mono"><Sparkles /> Current chapter</span><h3>From internship to full-time AI Engineer at TechAivv.</h3></div>
           <p>After completing my Software Developer Internship in June 2026, I stepped into a full-time AI engineering role where I’m sharpening production AI, system design, frontend quality, backend reliability, and collaborative delivery.</p>
           <div className="growth-tags">{growthSkills.map(skill => <span key={skill}>{skill}</span>)}</div>
         </motion.div>

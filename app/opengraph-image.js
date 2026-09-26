@@ -78,7 +78,7 @@ export default function OpengraphImage() {
             
           }}
         >
-          <div style={{ display: 'flex' }}>AI Engineer Associate · TechAivv</div>
+          <div style={{ display: 'flex' }}>AI Engineer · TechAivv</div>
           <div style={{ display: 'flex', color: '#8a8a93' }}>New Delhi, India</div>
         </div>
       </div>
