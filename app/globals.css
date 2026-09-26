@@ -18,8 +18,24 @@
   --shadow-hover: 0 2px 4px rgba(17, 17, 19, .04), 0 20px 40px -16px rgba(17, 17, 19, .16);
 }
 
+:root.dark {
+  --bg: #0c0c0e;
+  --surface: #141417;
+  --surface-2: #1b1b1f;
+  --text: #f4f4f5;
+  --text-2: #a1a1aa;
+  --text-3: #71717a;
+  --line: #232328;
+  --line-2: #34343b;
+  --accent: #8b9dff;
+  --accent-soft: rgba(139, 157, 255, .1);
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3);
+  --shadow-hover: 0 20px 40px -16px rgba(0, 0, 0, .6);
+}
+
+/* Without JS, follow the system preference */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light):not(.dark) {
     --bg: #0c0c0e;
     --surface: #141417;
     --surface-2: #1b1b1f;
@@ -37,7 +53,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; overflow-x: hidden; background: var(--bg); color: var(--text); font-family: var(--font-sans), system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0; transition: background-color .25s, color .25s; overflow-x: hidden; background: var(--bg); color: var(--text); font-family: var(--font-sans), system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: var(--accent); color: #fff; }
 h1, h2, h3 { font-weight: 600; letter-spacing: -.03em; }
@@ -63,6 +79,13 @@ em { font-family: var(--font-serif), Georgia, serif; font-style: italic; font-we
 .button-small { min-height: 38px; padding: 0 16px; font-size: .85rem; }
 .button-ghost { background: transparent; color: var(--text); border-color: var(--line-2); }
 .button-ghost:hover { opacity: 1; border-color: var(--text); }
+
+/* Theme toggle */
+.header-actions { display: flex; align-items: center; gap: 10px; }
+.theme-toggle { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--text); cursor: pointer; transition: border-color .2s, transform .2s, background .2s; }
+.theme-toggle:hover { border-color: var(--text); transform: translateY(-1px); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.theme-toggle svg { width: 17px; height: 17px; }
 
 /* Hero */
 .hero { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; padding-block: 72px 96px; }
