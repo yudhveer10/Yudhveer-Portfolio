@@ -1,8 +1,9 @@
 'use client';
 
+import { useEffect } from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import ThemeToggle from '@/components/ThemeToggle';
+import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
+import SiteHeader from '@/components/SiteHeader';
 import {
   ArrowDownToLine,
   ArrowUpRight,
@@ -57,10 +58,37 @@ const achievements = [
 
 const growthSkills = ['Applied AI engineering', 'Prompt design', 'Model evaluation', 'React architecture', 'API design', 'Production debugging', 'Git collaboration', 'Clear technical communication'];
 
-const reveal = { initial: { opacity: 0, y: 28 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.16 }, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } };
+const ease = [0.22, 1, 0.36, 1];
+const reveal = { initial: { opacity: 0, y: 28 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, amount: 0.16 }, transition: { duration: 0.65, ease } };
+
+// Hero entrance: children fade up one after another.
+const heroStagger = { hidden: {}, show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } } };
+const heroItem = { hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } } };
+const heroWord = { hidden: { y: '110%' }, show: { y: '0%', transition: { duration: 0.8, ease } } };
+
+// Chips inside a card pop in one by one once the card scrolls into view.
+const chipGroup = { hidden: { opacity: 0, y: 28 }, show: { opacity: 1, y: 0, transition: { duration: 0.65, ease, staggerChildren: 0.045, delayChildren: 0.15 } } };
+const chip = { hidden: { opacity: 0, scale: 0.85 }, show: { opacity: 1, scale: 1, transition: { duration: 0.35, ease } } };
+
+const headline = ['I', 'build', 'AI', 'products', 'that', 'feel'];
 
 function SectionHeader({ index, title, copy }) {
-  return <div className="section-header"><div><span className="mono">{index}</span><h2>{title}</h2></div>{copy ? <p>{copy}</p> : null}</div>;
+  return <motion.div {...reveal} className="section-header"><div><span className="mono">{index}</span><h2>{title}</h2></div>{copy ? <p>{copy}</p> : null}</motion.div>;
+}
+
+// Cards with the .spot class get a soft glow that follows the pointer.
+function useSpotlight() {
+  useEffect(() => {
+    const onMove = (event) => {
+      const card = event.target.closest?.('.spot');
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+      card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+    };
+    document.addEventListener('pointermove', onMove, { passive: true });
+    return () => document.removeEventListener('pointermove', onMove);
+  }, []);
 }
 
 function ProjectBody({ project }) {
@@ -80,29 +108,36 @@ function ProjectBody({ project }) {
 }
 
 export default function Home() {
+  useSpotlight();
+  const { scrollY } = useScroll();
+  const portraitY = useTransform(scrollY, [0, 700], [0, 56]);
+
   return (
+    <MotionConfig reducedMotion="user">
     <main>
-      <header className="site-header">
-        <a className="brand" href="#home" aria-label="Yudhveer home"><span>YS</span><strong>Yudhveer Singh Panwar</strong></a>
-        <nav aria-label="Primary navigation"><a href="#work">Work</a><a href="#capabilities">Capabilities</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#contact">Contact</a></nav>
-        <div className="header-actions">
-          <ThemeToggle />
-          <a className="button button-small" href="#contact">Let&apos;s work together <ArrowUpRight /></a>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section className="hero" id="home">
-        <motion.div className="hero-copy" initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8 }}>
-          <h1>I build AI products that feel <em>human.</em></h1>
-          <p>AI Engineer at TechAivv, crafting intelligent products end-to-end—from a rough idea to software people trust, understand, and enjoy using.</p>
-          <div className="hero-actions"><a className="button" href="#work">View selected work <ArrowUpRight /></a><a className="button button-ghost" href="/Yudhveer-Singh-Panwar-Resume.pdf" target="_blank" rel="noreferrer">Download résumé <ArrowDownToLine /></a></div>
-          <div className="availability mono"><span className="live-dot" />Based in New Delhi <i /> Available for meaningful AI product work</div>
-          <div className="role-pill"><BriefcaseBusiness /><span>Current role</span><strong>AI Engineer · TechAivv</strong></div>
+        <div className="hero-glow" aria-hidden="true" />
+        <motion.div className="hero-copy" variants={heroStagger} initial="hidden" animate="show">
+          <h1 aria-label="I build AI products that feel human.">
+            {headline.map(word => <span key={word} className="word" aria-hidden="true"><motion.span variants={heroWord}>{word}</motion.span></span>)}
+            <span className="word" aria-hidden="true">
+              <motion.em variants={heroWord}>human.</motion.em>
+              <svg className="scribble" viewBox="0 0 200 16" preserveAspectRatio="none"><motion.path d="M3 11 C 45 3, 95 3, 130 8 S 185 13, 197 6" variants={{ hidden: { pathLength: 0, opacity: 0 }, show: { pathLength: 1, opacity: 1, transition: { duration: 0.9, delay: 0.75, ease } } }} /></svg>
+            </span>
+          </h1>
+          <motion.p variants={heroItem}>AI Engineer at TechAivv, crafting intelligent products end-to-end—from a rough idea to software people trust, understand, and enjoy using.</motion.p>
+          <motion.div variants={heroItem} className="hero-actions"><a className="button" href="#work">View selected work <ArrowUpRight /></a><a className="button button-ghost" href="/Yudhveer-Singh-Panwar-Resume.pdf" target="_blank" rel="noreferrer">Download résumé <ArrowDownToLine /></a></motion.div>
+          <motion.div variants={heroItem} className="availability mono"><span className="live-dot" />Based in New Delhi <i /> Available for meaningful AI product work</motion.div>
+          <motion.div variants={heroItem} className="role-pill"><BriefcaseBusiness /><span>Current role</span><strong>AI Engineer · TechAivv</strong></motion.div>
         </motion.div>
 
-        <motion.div className="portrait-wrap" initial={false} animate={{ opacity: 1, scale: 1 }} transition={{ duration: .9, delay: .12 }}>
-          <Image src="/yudhveer.webp" alt="Yudhveer Singh Panwar" width={1500} height={2250} priority sizes="(max-width: 960px) 92vw, 520px" className="portrait" />
-          <div className="portrait-meta mono"><span>AI Engineer · Full Stack</span><span>New Delhi, India</span></div>
+        <motion.div className="portrait-wrap" initial={{ opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: .15, ease }}>
+          <motion.div className="portrait-parallax" style={{ y: portraitY }}>
+            <Image src="/yudhveer.webp" alt="Yudhveer Singh Panwar" width={1500} height={2250} priority sizes="(max-width: 960px) 92vw, 520px" className="portrait" />
+          </motion.div>
+          <motion.div className="portrait-meta mono" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .7, ease }}><span>AI Engineer · Full Stack</span><span>New Delhi, India</span></motion.div>
         </motion.div>
       </section>
 
@@ -110,31 +145,31 @@ export default function Home() {
         <SectionHeader index="Work" title="Selected work" copy="Four products where engineering depth meets useful, thoughtful experience." />
         <div className="project-list">
           {projects.map((project, i) => project.href
-            ? <motion.a key={project.title} {...reveal} transition={{ ...reveal.transition, delay: i * .05 }} className="project-row" href={project.href} target="_blank" rel="noreferrer"><ProjectBody project={project} /></motion.a>
-            : <motion.div key={project.title} {...reveal} transition={{ ...reveal.transition, delay: i * .05 }} className="project-row project-row-private" title="Private repository"><ProjectBody project={project} /></motion.div>
+            ? <motion.a key={project.title} {...reveal} transition={{ ...reveal.transition, delay: i * .05 }} className="project-row spot" href={project.href} target="_blank" rel="noreferrer"><ProjectBody project={project} /></motion.a>
+            : <motion.div key={project.title} {...reveal} transition={{ ...reveal.transition, delay: i * .05 }} className="project-row project-row-private spot" title="Private repository"><ProjectBody project={project} /></motion.div>
           )}
         </div>
       </section>
 
       <section className="section" id="capabilities">
         <SectionHeader index="Capabilities" title="What I bring" copy="One builder across product, intelligence, and production—not a chain of handoffs." />
-        <div className="capability-grid">{capabilities.map((cap, i) => { const Icon = cap.icon; return <motion.article key={cap.title} {...reveal} transition={{ ...reveal.transition, delay: i * .08 }} className="capability"><Icon /><span className="mono">0{i + 1}</span><h3>{cap.title}</h3><p>{cap.text}</p><ul>{cap.items.map(item => <li key={item}>{item}</li>)}</ul></motion.article>; })}</div>
+        <div className="capability-grid">{capabilities.map((cap, i) => { const Icon = cap.icon; return <motion.article key={cap.title} {...reveal} transition={{ ...reveal.transition, delay: i * .08 }} className="capability spot"><Icon /><span className="mono">0{i + 1}</span><h3>{cap.title}</h3><p>{cap.text}</p><ul>{cap.items.map(item => <li key={item}>{item}</li>)}</ul></motion.article>; })}</div>
       </section>
 
       <section className="section" id="skills">
         <SectionHeader index="Skills" title="Technical toolkit" copy="The stack I reach for—chosen for reliability in production, not novelty." />
-        <div className="skill-grid">{skills.map((group, i) => <motion.div key={group.label} {...reveal} transition={{ ...reveal.transition, delay: i * .06 }} className="skill-group"><span className="mono">{group.label}</span><ul>{group.items.map(item => <li key={item}>{item}</li>)}</ul></motion.div>)}</div>
+        <div className="skill-grid">{skills.map((group, i) => <motion.div key={group.label} variants={chipGroup} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="skill-group spot"><span className="mono">{group.label}</span><ul>{group.items.map(item => <motion.li key={item} variants={chip}>{item}</motion.li>)}</ul></motion.div>)}</div>
       </section>
 
       <section className="section journey-section" id="journey">
         <SectionHeader index="Journey" title="A builder’s journey" copy="The through-line is simple: learn the system, make it useful, then ship it well." />
-        <motion.div {...reveal} className="current-role-card">
+        <motion.div variants={chipGroup} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }} className="current-role-card spot">
           <div><span className="mono"><Sparkles /> Current chapter</span><h3>From internship to full-time AI Engineer at TechAivv.</h3></div>
           <p>After completing my Software Developer Internship in June 2026, I stepped into a full-time AI engineering role where I’m sharpening production AI, system design, frontend quality, backend reliability, and collaborative delivery.</p>
-          <div className="growth-tags">{growthSkills.map(skill => <span key={skill}>{skill}</span>)}</div>
+          <div className="growth-tags">{growthSkills.map(skill => <motion.span key={skill} variants={chip}>{skill}</motion.span>)}</div>
         </motion.div>
         <div className="timeline">{journey.map(([date, role, description], i) => <motion.div key={role} {...reveal} transition={{ ...reveal.transition, delay: i * .05 }} className="timeline-row"><span className="timeline-dot" /><time className="mono">{date}</time><h3>{role}</h3><p>{description}</p></motion.div>)}</div>
-        <div className="credential-grid">{achievements.map((item, i) => { const Icon = item.icon; return <motion.article key={item.title} {...reveal} transition={{ ...reveal.transition, delay: i * .06 }} className="credential"><Icon /><span className="mono">{item.meta}</span><h3>{item.title}</h3><p>{item.text}</p></motion.article>; })}</div>
+        <div className="credential-grid">{achievements.map((item, i) => { const Icon = item.icon; return <motion.article key={item.title} {...reveal} transition={{ ...reveal.transition, delay: i * .06 }} className="credential spot"><Icon /><span className="mono">{item.meta}</span><h3>{item.title}</h3><p>{item.text}</p></motion.article>; })}</div>
       </section>
 
       <section className="contact" id="contact">
@@ -150,5 +185,6 @@ export default function Home() {
 
       <footer><span>© {new Date().getFullYear()} Yudhveer Singh Panwar</span><span className="mono"><Terminal /> Built with intent. Shipped with care.</span></footer>
     </main>
+    </MotionConfig>
   );
 }
