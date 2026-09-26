@@ -1,6 +1,6 @@
 import { Inter, Instrument_Serif } from 'next/font/google';
 import './globals.css';
-import { ThemeProvider } from '@/components/ThemeProvider';
+import { ThemeProvider, themeInitScript } from '@/components/ThemeProvider';
 import { Analytics } from '@vercel/analytics/next';
 import { siteUrl, siteDescription as description } from './site-config';
 
@@ -98,6 +98,9 @@ const personSchema = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className={`${inter.variable} ${instrumentSerif.variable}`}>
         <ThemeProvider>{children}</ThemeProvider>
         <script

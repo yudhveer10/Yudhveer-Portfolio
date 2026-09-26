@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import ThemeToggle from '@/components/ThemeToggle';
 import {
   ArrowDownToLine,
   ArrowUpRight,
@@ -84,7 +85,10 @@ export default function Home() {
       <header className="site-header">
         <a className="brand" href="#home" aria-label="Yudhveer home"><span>YS</span><strong>Yudhveer Singh Panwar</strong></a>
         <nav aria-label="Primary navigation"><a href="#work">Work</a><a href="#capabilities">Capabilities</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#contact">Contact</a></nav>
-        <a className="button button-small" href="#contact">Let&apos;s work together <ArrowUpRight /></a>
+        <div className="header-actions">
+          <ThemeToggle />
+          <a className="button button-small" href="#contact">Let&apos;s work together <ArrowUpRight /></a>
+        </div>
       </header>
 
       <section className="hero" id="home">
