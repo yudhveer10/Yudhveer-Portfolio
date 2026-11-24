@@ -2,8 +2,10 @@
 
 import { useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import SiteHeader from '@/components/SiteHeader';
+import { services, plans } from './services/data';
 import {
   ArrowDownToLine,
   ArrowUpRight,
@@ -114,8 +116,8 @@ export default function Home() {
 
   return (
     <MotionConfig reducedMotion="user">
-    <main>
-      <SiteHeader />
+    <main id="main-content">
+      <SiteHeader active="home" />
 
       <section className="hero" id="home">
         <div className="hero-glow" aria-hidden="true" />
@@ -127,8 +129,8 @@ export default function Home() {
               <svg className="scribble" viewBox="0 0 200 16" preserveAspectRatio="none"><motion.path d="M3 11 C 45 3, 95 3, 130 8 S 185 13, 197 6" variants={{ hidden: { pathLength: 0, opacity: 0 }, show: { pathLength: 1, opacity: 1, transition: { duration: 0.9, delay: 0.75, ease } } }} /></svg>
             </span>
           </h1>
-          <motion.p variants={heroItem}>AI Engineer at TechAivv, crafting intelligent products end-to-end—from a rough idea to software people trust, understand, and enjoy using.</motion.p>
-          <motion.div variants={heroItem} className="hero-actions"><a className="button" href="#work">View selected work <ArrowUpRight /></a><a className="button button-ghost" href="/Yudhveer-Singh-Panwar-Resume.pdf" target="_blank" rel="noreferrer">Download résumé <ArrowDownToLine /></a></motion.div>
+          <motion.p variants={heroItem}>AI Engineer at TechAivv and independent technology consultant. I build useful software and automation, and help businesses connect digital campaigns to the systems behind them.</motion.p>
+          <motion.div variants={heroItem} className="hero-actions"><Link className="button" href="/services">Explore services <ArrowUpRight /></Link><a className="button button-ghost" href="#work">View selected work <ArrowUpRight /></a><a className="resume-link" href="/Yudhveer-Singh-Panwar-Resume.pdf" target="_blank" rel="noreferrer">Download résumé <ArrowDownToLine /></a></motion.div>
           <motion.div variants={heroItem} className="availability mono"><span className="live-dot" />Based in New Delhi <i /> Available for meaningful AI product work</motion.div>
           <motion.div variants={heroItem} className="role-pill"><BriefcaseBusiness /><span>Current role</span><strong>AI Engineer · TechAivv</strong></motion.div>
         </motion.div>
@@ -154,6 +156,12 @@ export default function Home() {
       <section className="section" id="capabilities">
         <SectionHeader index="Capabilities" title="What I bring" copy="One builder across product, intelligence, and production—not a chain of handoffs." />
         <div className="capability-grid">{capabilities.map((cap, i) => { const Icon = cap.icon; return <motion.article key={cap.title} {...reveal} transition={{ ...reveal.transition, delay: i * .08 }} className="capability spot"><Icon /><span className="mono">0{i + 1}</span><h3>{cap.title}</h3><p>{cap.text}</p><ul>{cap.items.map(item => <li key={item}>{item}</li>)}</ul></motion.article>; })}</div>
+      </section>
+
+      <section className="section home-services" id="services">
+        <SectionHeader index="Services" title="Practical help for growing businesses" copy="AI engineering, software and digital growth services, built and managed with a clear scope." />
+        <div className="home-service-grid">{services.slice(0, 3).map(item => <Link href={`/services#${item.id}`} key={item.id}><span className="mono">{item.number}</span><h3>{item.title}</h3><p>{item.description}</p><span className="home-service-arrow">Explore service <ArrowUpRight /></span></Link>)}</div>
+        <div className="home-services-bottom"><p>Monthly plans start at <strong>₹{plans[0].price.toLocaleString('en-IN')}</strong>. Custom projects are quoted separately.</p><Link className="button button-ghost" href="/services#pricing">View all services & plans <ArrowUpRight /></Link></div>
       </section>
 
       <section className="section" id="skills">

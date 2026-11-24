@@ -33,6 +33,9 @@ export const metadata = {
     'Applied AI',
     'Machine Learning',
     'New Delhi',
+    'AI Automation Consultant India',
+    'Meta Ads Management Delhi',
+    'Website Development Services',
   ],
   authors: [{ name: 'Yudhveer Singh Panwar', url: siteUrl }],
   creator: 'Yudhveer Singh Panwar',
@@ -102,6 +105,7 @@ export default function RootLayout({ children }) {
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className={`${inter.variable} ${instrumentSerif.variable}`}>
+        <a className="skip-link" href="#main-content">Skip to content</a>
         <ThemeProvider>{children}</ThemeProvider>
         <script
           type="application/ld+json"
