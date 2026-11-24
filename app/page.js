@@ -10,8 +10,6 @@ import {
   ArrowDownToLine,
   ArrowUpRight,
   Award,
-  Box,
-  BrainCircuit,
   BriefcaseBusiness,
   Code2,
   Github,
@@ -20,7 +18,6 @@ import {
   Lock,
   Mail,
   MapPin,
-  Rocket,
   Sparkles,
   Terminal,
 } from 'lucide-react';
@@ -33,9 +30,9 @@ const projects = [
 ];
 
 const capabilities = [
-  { icon: Box, title: 'Product Engineering', text: 'I turn ambitious ideas into responsive, dependable products with clear architecture.', items: ['Full-stack web & mobile', 'System design & APIs', 'Performance & reliability'] },
-  { icon: BrainCircuit, title: 'Applied AI', text: 'I make models useful—shaping data, evaluation, and interfaces around real people.', items: ['LLMs & agentic systems', 'Vision & deep learning', 'RAG & vector search'] },
-  { icon: Rocket, title: 'Ship & Scale', text: 'I carry the work from prototype to production with a bias for momentum and quality.', items: ['Cloud & containers', 'CI/CD & observability', 'Security-minded delivery'] },
+  { title: 'Product engineering', text: 'Web and mobile products, from the interface down to the API and data model.', items: ['Full-stack web & mobile', 'System design & APIs', 'Performance & reliability'] },
+  { title: 'Applied AI', text: 'Models connected to a useful workflow, with evaluation and human review where they matter.', items: ['LLMs & agentic systems', 'Vision & deep learning', 'RAG & vector search'] },
+  { title: 'Delivery & operations', text: 'The deployment, monitoring and maintenance that keep a product useful after launch.', items: ['Cloud & containers', 'CI/CD & observability', 'Security-minded delivery'] },
 ];
 
 const skills = [
@@ -154,8 +151,8 @@ export default function Home() {
       </section>
 
       <section className="section" id="capabilities">
-        <SectionHeader index="Capabilities" title="What I bring" copy="One builder across product, intelligence, and production—not a chain of handoffs." />
-        <div className="capability-grid">{capabilities.map((cap, i) => { const Icon = cap.icon; return <motion.article key={cap.title} {...reveal} transition={{ ...reveal.transition, delay: i * .08 }} className="capability spot"><Icon /><span className="mono">0{i + 1}</span><h3>{cap.title}</h3><p>{cap.text}</p><ul>{cap.items.map(item => <li key={item}>{item}</li>)}</ul></motion.article>; })}</div>
+        <SectionHeader index="Capabilities" title="What I bring" copy="The work spans the product, the model and what happens after launch." />
+        <div className="capability-grid">{capabilities.map((cap, i) => <motion.article key={cap.title} {...reveal} transition={{ ...reveal.transition, delay: i * .08 }} className="capability"><span className="mono capability-index">0{i + 1}</span><div className="capability-body"><h3>{cap.title}</h3><p>{cap.text}</p></div><ul>{cap.items.map(item => <li key={item}>{item}</li>)}</ul></motion.article>)}</div>
       </section>
 
       <section className="section home-services" id="services">
@@ -166,7 +163,7 @@ export default function Home() {
 
       <section className="section" id="skills">
         <SectionHeader index="Skills" title="Technical toolkit" copy="The stack I reach for—chosen for reliability in production, not novelty." />
-        <div className="skill-grid">{skills.map((group, i) => <motion.div key={group.label} variants={chipGroup} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="skill-group spot"><span className="mono">{group.label}</span><ul>{group.items.map(item => <motion.li key={item} variants={chip}>{item}</motion.li>)}</ul></motion.div>)}</div>
+        <div className="skill-grid">{skills.map(group => <motion.div key={group.label} variants={chipGroup} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="skill-group"><span className="mono">{group.label}</span><ul>{group.items.map(item => <motion.li key={item} variants={chip}>{item}</motion.li>)}</ul></motion.div>)}</div>
       </section>
 
       <section className="section journey-section" id="journey">
@@ -177,7 +174,7 @@ export default function Home() {
           <div className="growth-tags">{growthSkills.map(skill => <motion.span key={skill} variants={chip}>{skill}</motion.span>)}</div>
         </motion.div>
         <div className="timeline">{journey.map(([date, role, description], i) => <motion.div key={role} {...reveal} transition={{ ...reveal.transition, delay: i * .05 }} className="timeline-row"><span className="timeline-dot" /><time className="mono">{date}</time><h3>{role}</h3><p>{description}</p></motion.div>)}</div>
-        <div className="credential-grid">{achievements.map((item, i) => { const Icon = item.icon; return <motion.article key={item.title} {...reveal} transition={{ ...reveal.transition, delay: i * .06 }} className="credential spot"><Icon /><span className="mono">{item.meta}</span><h3>{item.title}</h3><p>{item.text}</p></motion.article>; })}</div>
+        <div className="credential-grid">{achievements.map((item, i) => { const Icon = item.icon; return <motion.article key={item.title} {...reveal} transition={{ ...reveal.transition, delay: i * .06 }} className="credential"><Icon /><span className="mono">{item.meta}</span><h3>{item.title}</h3><p>{item.text}</p></motion.article>; })}</div>
       </section>
 
       <section className="contact" id="contact">
