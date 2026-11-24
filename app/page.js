@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MotionConfig, motion, useScroll, useTransform } from 'framer-motion';
 import SiteHeader from '@/components/SiteHeader';
-import { services, plans } from './services/data';
+import { services } from './services/data';
 import {
   ArrowDownToLine,
   ArrowUpRight,
@@ -46,9 +46,9 @@ const skills = [
 ];
 
 const journey = [
-  ['June 2026 — Present', 'AI Engineer · TechAivv Technologies', 'Building a scalable full-stack AI SaaS platform—integrating generative models to automate 80% of manual user workflows, and engineering backends for real-time inference under 200ms.'],
-  ['Nov 2025 — June 2026', 'Software Developer Intern · TechAivv Technologies', 'Designed responsive interfaces in Next.js and React, reaching a 95+ Lighthouse score and cutting initial page-load latency by 45% through efficient component modularity.'],
-  ['July 2025 — Aug 2025', 'Python Developer Intern · Paisalo Digital Limited', 'Built internal workflow automation with Python, Pandas, NumPy, and OCR—automating 80% of repetitive tasks, halving manual effort, and improving data-flow reliability by 35%.'],
+  ['June 2026 — Present', 'AI Engineer · TechAivv Technologies', 'Working on AI-enabled software and production engineering in a collaborative team. Project details are confidential.'],
+  ['Nov 2025 — June 2026', 'Software Developer Intern · TechAivv Technologies', 'Contributed to frontend development and software delivery. Implementation details and internal metrics are confidential.'],
+  ['July 2025 — Aug 2025', 'Python Developer Intern · Paisalo Digital Limited', 'Supported internal Python development and workflow improvements. Internal systems and results are confidential.'],
   ['2022 — 2026', 'B.Tech · AI & Data Science', 'Strengthened the fundamentals: algorithms, data structures, statistics, data engineering, model thinking, and problem decomposition.'],
 ];
 
@@ -161,7 +161,7 @@ export default function Home() {
       <section className="section home-services" id="services">
         <SectionHeader index="Services" title="Practical help for growing businesses" copy="AI engineering, software and digital growth services, built and managed with a clear scope." />
         <div className="home-service-grid">{services.slice(0, 3).map(item => <Link href={`/services#${item.id}`} key={item.id}><span className="mono">{item.number}</span><h3>{item.title}</h3><p>{item.description}</p><span className="home-service-arrow">Explore service <ArrowUpRight /></span></Link>)}</div>
-        <div className="home-services-bottom"><p>Monthly plans start at <strong>₹{plans[0].price.toLocaleString('en-IN')}</strong>. Custom projects are quoted separately.</p><Link className="button button-ghost" href="/services#pricing">View all services & plans <ArrowUpRight /></Link></div>
+        <div className="home-services-bottom"><p>Start with your goal. I&apos;ll help shape the right scope for it.</p><Link className="button button-ghost" href="/services">Explore all services <ArrowUpRight /></Link></div>
       </section>
 
       <section className="section" id="skills">

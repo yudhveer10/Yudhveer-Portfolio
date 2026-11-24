@@ -12,8 +12,16 @@ const links = [
   { id: 'journey', label: 'Experience', href: '/#journey' },
   { id: 'work', label: 'Projects', href: '/#work' },
   { id: 'services', label: 'Services', href: '/services' },
-  { id: 'pricing', label: 'Pricing', href: '/services#pricing' },
-  { id: 'contact', label: 'Contact', href: '/#contact' },
+  { id: 'pricing', label: 'Pricing', href: '/pricing' },
+  { id: 'solutions', label: 'Solutions', href: '/solutions' },
+  { id: 'contact', label: 'Contact', href: '/contact' },
+];
+const moreLinks = [
+  { id: 'consultation', label: 'Consultations', href: '/consultation' },
+  { id: 'store', label: 'Digital products', href: '/store' },
+  { id: 'resources', label: 'Resources', href: '/resources' },
+  { id: 'blog', label: 'Guides', href: '/blog' },
+  { id: 'tools', label: 'Planning tools', href: '/tools' },
 ];
 
 export default function SiteHeader({ active = 'home' }) {
@@ -46,8 +54,9 @@ export default function SiteHeader({ active = 'home' }) {
     <Link className="brand" href="/" aria-label="Yudhveer home" onClick={() => setOpen(false)}><span>YS</span><strong>Yudhveer Singh Panwar</strong></Link>
     <nav className={open ? 'nav-open' : ''} aria-label="Primary navigation">
       {links.map(link => <Link key={link.id} href={link.href} className={activeSection === link.id ? 'is-active' : undefined} aria-current={activeSection === link.id ? 'page' : undefined} onClick={() => setOpen(false)}>{activeSection === link.id && <motion.span layoutId="nav-pill" className="nav-pill" transition={{ type: 'spring', stiffness: 380, damping: 32 }} />}{link.label}</Link>)}
+      <details className="nav-more"><summary>More</summary><div className="nav-more-menu">{moreLinks.map(link => <Link key={link.id} href={link.href} aria-current={activeSection === link.id ? 'page' : undefined} onClick={() => setOpen(false)}>{link.label}</Link>)}</div></details>
     </nav>
-    <div className="header-actions"><ThemeToggle /><Link className="button button-small header-cta" href="/services#enquiry">Let&apos;s work together <ArrowUpRight /></Link></div>
+    <div className="header-actions"><ThemeToggle /><Link className="button button-small header-cta" href="/contact">Let&apos;s work together <ArrowUpRight /></Link></div>
     <button className="menu-toggle" type="button" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
   </header>;
 }

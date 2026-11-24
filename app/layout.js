@@ -39,6 +39,7 @@ export const metadata = {
   ],
   authors: [{ name: 'Yudhveer Singh Panwar', url: siteUrl }],
   creator: 'Yudhveer Singh Panwar',
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } } : {}),
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
