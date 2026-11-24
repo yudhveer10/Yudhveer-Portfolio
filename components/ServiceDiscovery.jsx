@@ -2,14 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import {
-  ArrowDownToLine,
   ArrowRight,
   ArrowUpRight,
   BarChart3,
   BrainCircuit,
   Check,
   Code2,
-  Mail,
   Megaphone,
   Palette,
   Wrench,
@@ -21,12 +19,12 @@ const icons = { BrainCircuit, Megaphone, Workflow, Code2, BarChart3, Wrench, Pal
 const publishedServices = services.filter(service => service.published);
 
 const flow = [
-  { label: 'Attract', title: 'Facebook & Instagram ads', text: 'Reach the right audience with a clear offer.', icon: Megaphone },
-  { label: 'Capture', title: 'Lead capture', text: 'Bring enquiries into one reliable place.', icon: ArrowDownToLine },
-  { label: 'Organise', title: 'CRM integration', text: 'Give each lead context and a next step.', icon: Workflow },
-  { label: 'Respond', title: 'Automated follow-up', text: 'Follow up with consent and at the right time.', icon: Mail },
-  { label: 'Convert', title: 'Customer conversion', text: 'Help your team act on qualified interest.', icon: Check },
-  { label: 'Learn', title: 'Business analytics', text: 'See what worked and improve the journey.', icon: BarChart3 },
+  { label: 'Attract', title: 'Run a focused campaign', text: 'Reach people with a clear offer on Facebook or Instagram.' },
+  { label: 'Capture', title: 'Collect enquiries', text: 'Send form responses to one place where nothing gets lost.' },
+  { label: 'Organise', title: 'Keep the context', text: 'Record the source, request and next step for each lead.' },
+  { label: 'Respond', title: 'Follow up on time', text: 'Use agreed reminders and messages when a reply is due.' },
+  { label: 'Convert', title: 'Make the conversation count', text: 'Give your team the information it needs to close the right enquiries.' },
+  { label: 'Learn', title: 'Review what worked', text: 'See which campaigns led to real conversations and customers.' },
 ];
 
 export function ServiceExplorer() {
@@ -81,19 +79,15 @@ export function ServiceExplorer() {
 
 export function CustomerFlowDiagram() {
   return <div className="flow-wrap">
-    <div className="flow-caption"><span>One connected system</span><span>From first interaction to a clearer decision</span></div>
+    <div className="flow-caption"><span>Example workflow</span><span>Six steps, adapted to the way your business works</span></div>
     <ol className="flow-diagram">
-      {flow.map((step, index) => {
-        const Icon = step.icon;
-        return <li key={step.title}>
-          <div className="flow-node"><Icon aria-hidden="true" /></div>
-          <span className="flow-step mono">0{index + 1} / {step.label}</span>
+      {flow.map((step, index) => <li key={step.title}>
+          <span className="flow-step mono">0{index + 1} <span>{step.label}</span></span>
           <h3>{step.title}</h3>
           <p>{step.text}</p>
-        </li>;
-      })}
+        </li>)}
     </ol>
-    <div className="flow-summary"><span className="flow-summary-mark">AI</span><p>Automation connects the handoffs. Your team stays in control of the conversations, customer data and decisions.</p></div>
+    <p className="flow-summary"><strong>People stay in control.</strong> Automation can handle routine handoffs while your team manages the conversations, customer data and decisions.</p>
   </div>;
 }
 

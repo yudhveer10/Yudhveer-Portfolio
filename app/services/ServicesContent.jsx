@@ -76,7 +76,7 @@ export default function ServicesContent() {
 
     <section className="section service-section" id="services-list"><div className="section-header"><div><span className="mono">What I can build and manage</span><h2>Find the right kind of help</h2></div><p>Choose a service to see what it can solve and what a project might include.</p></div><ServiceExplorer /></section>
 
-    <section className="section service-section workflow-section" id="workflow"><div className="section-header"><div><span className="mono">A connected journey</span><h2>From clicks to customers — powered by AI</h2></div><p>Advertising starts the conversation. Automation can help capture, organise and follow up with potential customers.</p></div><CustomerFlowDiagram /></section>
+    <section className="section service-section workflow-section" id="workflow"><div className="section-header"><div><span className="mono">From enquiry to follow-up</span><h2>What happens after someone clicks?</h2></div><p>A campaign works better when each enquiry has a clear place to go and a person responsible for the next step.</p></div><CustomerFlowDiagram /></section>
 
     <section className="section service-section" id="industries"><div className="section-header"><div><span className="mono">Potential applications</span><h2>Explore a use case</h2></div><p>Choose an industry to see a possible workflow. These are examples, not past client projects.</p></div><IndustryExplorer /></section>
 
