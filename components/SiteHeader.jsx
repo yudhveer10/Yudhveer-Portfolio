@@ -8,11 +8,8 @@ import ThemeToggle from './ThemeToggle';
 
 const links = [
   { id: 'home', label: 'Home', href: '/' },
-  { id: 'capabilities', label: 'About', href: '/#capabilities' },
-  { id: 'journey', label: 'Experience', href: '/#journey' },
   { id: 'work', label: 'Projects', href: '/#work' },
   { id: 'services', label: 'Services', href: '/services' },
-  { id: 'pricing', label: 'Pricing', href: '/pricing' },
   { id: 'solutions', label: 'Solutions', href: '/solutions' },
   { id: 'contact', label: 'Contact', href: '/contact' },
 ];
